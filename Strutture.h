@@ -1,4 +1,5 @@
 #include <vector>
+#include <math.h>
 using namespace std;
 struct Color {
 	int r;
@@ -25,12 +26,16 @@ struct triangle3d {
 struct mesh {
 	vector<triangle3d> tris;
 };
+struct mat4x4 {
+	float m[4][4] = { 0 };
+};
 static class meshGenerator {
 public:
+	
 	static mesh creatCube(float size) {
 		mesh meshCube;
 		meshCube.tris = {
-
+			                                                                                                                                                                                                          
 			// SOUTH
 			{ 0.0f, 0.0f, 0.0f,    0.0f, size, 0.0f,    size, size, 0.0f },
 			{ 0.0f, 0.0f, 0.0f,    size, size, 0.0f,    size, 0.0f, 0.0f },
@@ -44,7 +49,7 @@ public:
 			{ size, 0.0f, size,    0.0f, size, size,    0.0f, 0.0f, size },
 
 			// WEST                                                  
-			{ 0.0f, 0.0f, size,    0.0f, size, size,    0.0f, size, 0.0f },
+			{ 0.0f, 0.0f, size,    0.f, size, size,    0.0f, size, 0.0f },
 			{ 0.0f, 0.0f, size,    0.0f, size, 0.0f,    0.0f, 0.0f, 0.0f },
 
 			// TOP                                                   
@@ -56,6 +61,27 @@ public:
 			{ size, 0.0f, size,    0.0f, 0.0f, 0.0f,    size, 0.0f, 0.0f },
 
 		};
+		
 		return meshCube;
 	}
+	static mesh createPyramid(float size) {
+		mesh meshPyr;
+		meshPyr.tris = {
+
+			// SOUTH
+			{ 0.0f, 0.0f, 0.0f,    size, 0.0f, 0.0f,    size, 0.f, size },
+			{ 0.0f, 0.0f, 0.0f,    0.f, 0.f, size,     size, 0.f, size },
+
+			{ 0.0f, 0.0f, 0.0f,    0.f, 0.f, size,    size*0.5f, size, size * 0.5f },
+
+			{ 0.0f, 0.0f, 0.0f,    size, 0.f, 0.f,    size * 0.5f, size, size * 0.5f },
+			{ size, 0.f, 0.f,    size, 0.f, size,    size * 0.5f, size, size * 0.5f },
+			{ 0.0f, 0.0f, size,    size, 0.f, size,    size * 0.5f, size, size * 0.5f },
+			
+
+		};
+
+		return meshPyr;
+	}
+	
 };
