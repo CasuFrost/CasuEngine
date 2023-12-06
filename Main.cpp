@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 		for (auto tri : cube.tris) {
 			
 		}
-
+		w.drawSquare({ 44,44 }, 10, c);
 
 
 		w.endLoop();
