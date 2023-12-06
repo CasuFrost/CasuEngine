@@ -1,0 +1,1 @@
+"D:\VisualStudio\libs\SDL2-2.28.5"

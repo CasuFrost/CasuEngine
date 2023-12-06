@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\mcasu\OneDrive\Desktop\CasuEngine\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\mcasu\OneDrive\Desktop\CasuEngine\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\VisualStudio\libs\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\VisualStudio\libs\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>C:\Users\mcasu\OneDrive\Desktop\CasuEngine\SDL2-2.28.5\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,6 +147,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="meshGenerator.h" />
     <ClInclude Include="Strutture.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>

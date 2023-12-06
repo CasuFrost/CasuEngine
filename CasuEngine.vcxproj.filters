@@ -29,5 +29,8 @@
     <ClInclude Include="Strutture.h">
       <Filter>File di risorse\Libs</Filter>
     </ClInclude>
+    <ClInclude Include="meshGenerator.h">
+      <Filter>File di risorse\Libs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

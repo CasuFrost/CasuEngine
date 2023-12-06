@@ -1,8 +1,7 @@
 #include <iostream>
-#include <vector>
-#include <SDL.h>
+
 #include "WindowManager.h"
-#include "Strutture.h"
+
 #include <math.h>
 using namespace std;
 
@@ -11,8 +10,9 @@ int main(int argc, char* argv[]) {
 	Color c = {255,0,0,255};
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
-	
 
+	meshGenerator meshGen;
+	mesh cube = meshGen.creatCube(1.0f);
 
 	//Main loop flag
 	bool quit = false;
@@ -20,9 +20,9 @@ int main(int argc, char* argv[]) {
 	SDL_Event e;
 	float time = 0;
 	
-	int x = 200;int y = 200;
+	
 	while (!quit) {
-		w.drawSquare({ x,y }, 20, c);
+		
 		time +=0.01;
 		while (SDL_PollEvent(&e) != 0)
 		{
@@ -32,14 +32,17 @@ int main(int argc, char* argv[]) {
 				quit = true;
 			}
 		}
-		x += 1;
-		y += 1;
+		//Draw some triangles
+		for (auto tri : cube.tris) {
+			
+		}
+
+
 
 		w.endLoop();
 	}
 
 
-	
 	
 	int h;
 	cin>>h;

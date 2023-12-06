@@ -28,7 +28,7 @@ public:
 		
 	}
 
-	void drawTriangle(vec2 p1, vec2 p2, vec2 p3, Color c) {
+	void drawTriangle(vec2d p1, vec2d p2, vec2d p3, Color c) {
 		drawLine(p1.x, p1.y, p2.x, p2.y, c);
 		drawLine(p1.x, p1.y, p3.x, p3.y, c);
 		drawLine(p2.x, p2.y, p3.x, p3.y, c);
@@ -41,11 +41,11 @@ public:
 		drawLine(t.p2.x, t.p2.y, t.p3.x, t.p3.y, c);
 		
 	}
-	void drawPoint(vec2 p, Color c) {
+	void drawPoint(vec2d p, Color c) {
 		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		SDL_RenderDrawPoint(renderer, p.x, p.y);
 	}
-	void drawSquare(vec2 pos, int size, Color c) {
+	void drawSquare(vec2d pos, int size, Color c) {
 		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		drawLine(pos.x - (int)size / 2, pos.y - (int)size / 2, pos.x + (int)size / 2, pos.y - (int)size / 2, c);
 		drawLine(pos.x - (int)size / 2, pos.y + (int)size / 2, pos.x + (int)size / 2, pos.y + (int)size / 2, c);

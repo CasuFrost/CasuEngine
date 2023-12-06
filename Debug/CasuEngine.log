@@ -1,3 +1,4 @@
 ﻿  Main.cpp
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Strutture.h(61,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(26,14): warning C4305: '+=': troncamento da 'double' a 'float'
   CasuEngine.vcxproj -> C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Debug\CasuEngine.exe
