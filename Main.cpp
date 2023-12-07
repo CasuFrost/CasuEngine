@@ -65,9 +65,10 @@ int main(int argc, char* argv[]) {
 
 
 
-
+		
 		//Draw some triangles
 		for (auto tri : cube.tris) {
+			
 			triangle3d triProjected, triTranslated,triRotatedZ,triRotatedX;
 
 			w.MultiplyMatVec(tri.p[0], triRotatedZ.p[0], matRotZ);//Proietta un singolo triangolo
@@ -108,9 +109,10 @@ int main(int argc, char* argv[]) {
 			triProjected.p[0].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)w.getScreenWidth();
 			triProjected.p[1].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)w.getScreenWidth();
 			triProjected.p[2].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)w.getScreenWidth();
-
-			w.drawTriangle(triProjected, c);
+			
+			w.drawRasterizedTriangle(triProjected, c);
 		}
+		
 		
 
 
