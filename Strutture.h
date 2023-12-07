@@ -30,8 +30,27 @@ struct mat4x4 {
 	float m[4][4] = { 0 };
 };
 static class meshGenerator {
+private:
 public:
-	
+	static vec3d midPointVector3D(vec3d a,vec3d b){
+		vec3d mid;
+		mid = { (a.x + b.x),(a.y + b.y),a.z + b.z };
+		mid.x *= 0.5f;
+		mid.y *= 0.5f;
+		mid.z *= 0.5f;
+		return mid;
+	}
+	static void subsectMesh(mesh &o) {
+		vector<triangle3d> newTris;
+		for (auto tri : o.tris) {
+			vec3d mid = midPointVector3D(tri.p[0], tri.p[1]);//divide tri
+			triangle3d tri1 = { tri.p[0],mid,tri.p[2] };
+			triangle3d tri2 = { tri.p[1],mid,tri.p[2] };
+			newTris.insert(newTris.end(), tri1);
+			newTris.insert(newTris.end(), tri2);
+		}
+		o.tris = newTris;
+	}
 	static mesh creatCube(float size) {
 		mesh meshCube;
 		meshCube.tris = {

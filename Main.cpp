@@ -22,6 +22,17 @@ int main(int argc, char* argv[]) {
 	float time = 0;
 	mat4x4 matRotX, matRotZ;
 	
+	
+
+
+
+	
+	
+	
+		float dirX = 1.f;
+		float dirY = 1.f;
+		float dirZ = 1.f;
+		float speed = 0;
 	while (!quit) {
 		
 		time +=0.01;
@@ -32,7 +43,13 @@ int main(int argc, char* argv[]) {
 			{
 				quit = true;
 			}
+			if (e.type == SDL_KEYDOWN) {
+				if (e.key.keysym.sym == SDLK_SPACE) {
+					meshGen.subsectMesh(cube);
+				}
+			}
 		}
+		
 		matRotZ.m[0][0] = cosf(time);
 		matRotZ.m[0][1] = sinf(time);
 		matRotZ.m[1][0] = -sinf(time);
@@ -45,6 +62,9 @@ int main(int argc, char* argv[]) {
 		matRotX.m[2][1] = -sinf(time * 0.5f);
 		matRotX.m[2][2] = cosf(time * 0.5f);
 		matRotX.m[0][0] = matRotX.m[3][3] = 1;
+
+
+
 
 		//Draw some triangles
 		for (auto tri : cube.tris) {
@@ -63,9 +83,16 @@ int main(int argc, char* argv[]) {
 
 
 			triTranslated = triRotatedX;
-			triTranslated.p[0].z = triRotatedX.p[0].z + 3.f;
+			triTranslated.p[0].z = triRotatedX.p[0].z +3.f;
 			triTranslated.p[1].z = triRotatedX.p[1].z + 3.f;
 			triTranslated.p[2].z = triRotatedX.p[2].z + 3.f;
+			
+			
+			triTranslated.p[0].z += (time * speed);
+			triTranslated.p[1].z += (time * speed);
+			triTranslated.p[2].z += (time * speed);
+			
+			
 
 
 			w.MultiplyMatVec(triTranslated.p[0], triProjected.p[0], w.projMatrix);//Proietta un singolo triangolo
@@ -89,10 +116,7 @@ int main(int argc, char* argv[]) {
 
 		w.endLoop();
 	}
-
-
 	
-	int h;
-	cin>>h;
+	
 	return 0;
 }
