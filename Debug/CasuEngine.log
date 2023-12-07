@@ -1,5 +1,5 @@
 ﻿  Main.cpp
-C:\Users\mcasu\OneDrive\Documenti\CasuEngine\Strutture.h(106,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
+C:\Users\mcasu\OneDrive\Documenti\CasuEngine\Strutture.h(136,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Documenti\CasuEngine\WindowManager.h(80,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.

@@ -32,6 +32,34 @@ struct mat4x4 {
 static class meshGenerator {
 private:
 public:
+	static vector<int> getHypotenuse(triangle3d tri) { //This function get a triangle and returns de index of the 2 points of the hypotenuse
+		float dist01 = sqrtf(powf((tri.p[1].x - tri.p[0].x),2)+ powf((tri.p[1].y - tri.p[0].y), 2)
+			+ powf((tri.p[1].z - tri.p[0].z), 2));
+		float dist02 = sqrtf(powf((tri.p[2].x - tri.p[0].x), 2) + powf((tri.p[2].y - tri.p[0].y), 2)
+			+ powf((tri.p[2].z - tri.p[0].z), 2));
+		float dist12 = sqrtf(powf((tri.p[2].x - tri.p[1].x), 2) + powf((tri.p[2].y - tri.p[1].y), 2)
+			+ powf((tri.p[2].z - tri.p[1].z), 2));
+		vector<int> v;
+		if ((dist01>dist02) && (dist01 > dist12)) {
+			v.push_back(0);
+			v.push_back(1);
+			v.push_back(2);
+		}
+		if ((dist12 > dist02) && (dist12 > dist01)) {
+			v.push_back(1);
+			v.push_back(2);
+			v.push_back(0);
+		}
+		if ((dist02 > dist01) && (dist02 > dist12)) {
+			v.push_back(0);
+			v.push_back(2);
+			v.push_back(1);
+		}
+		return v;
+	}
+
+
+
 	static vec3d midPointVector3D(vec3d a,vec3d b){
 		vec3d mid;
 		mid = { (a.x + b.x),(a.y + b.y),a.z + b.z };
@@ -43,9 +71,11 @@ public:
 	static void subsectMesh(mesh &o) {
 		vector<triangle3d> newTris;
 		for (auto tri : o.tris) {
-			vec3d mid = midPointVector3D(tri.p[0], tri.p[1]);//divide tri
-			triangle3d tri1 = { tri.p[0],mid,tri.p[2] };
-			triangle3d tri2 = { tri.p[1],mid,tri.p[2] };
+			vector<int> hypVertices = getHypotenuse(tri);
+			//Divido il triangolo creado il "midPoint" nel lato dell'ipotenusa
+			vec3d mid = midPointVector3D(tri.p[hypVertices[0]], tri.p[hypVertices[1]]);//divide tri
+			triangle3d tri1 = { tri.p[hypVertices[0]],mid,tri.p[hypVertices[2]]};
+			triangle3d tri2 = { tri.p[hypVertices[1]],mid,tri.p[hypVertices[2]]};
 			newTris.insert(newTris.end(), tri1);
 			newTris.insert(newTris.end(), tri2);
 		}
