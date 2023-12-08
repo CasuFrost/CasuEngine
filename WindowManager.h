@@ -4,11 +4,13 @@
 
 class WindowManager {
 private :
+	vector<mesh> meshPool;
+	vec3d vCamera = { 0,0,0 };
 	SDL_Renderer* renderer;
 	//window size
 	int width = 1000;
 	int height = 1000;
-
+	mat4x4 matRotX, matRotZ;
 	bool is_top_left(vec2d a, vec2d b) {
 		vec2d edge = { b.x - a.x,b.y - a.y };
 		bool is_top_edge = edge.y == 0 && edge.x > 0;
@@ -38,7 +40,38 @@ private :
 		
 		return w_0 >= 0 && w_1 >= 0 && w_2 >= 0;
 	}
+	mesh getMesh(int i) {
+		if(i<=meshPool.size())return meshPool[i];
+		mesh a;
+		return a;
+	}
 public:
+	void updateMeshPosition(int i, vec3d newPos) {
+		if (i <= meshPool.size()) {
+			meshPool[i].position = newPos;
+		}
+	}
+	void updateMeshRotationDegrees(int i, vec3d newRot) {
+		if (i <= meshPool.size()) {
+			meshPool[i].rotation = newRot;
+		}
+	}
+	void updateMeshColor(int i, Color c) {
+		if (i <= meshPool.size()) {
+			meshPool[i].color = c;
+		}
+	}
+	void subsetAllMesh() {
+		meshGenerator meshGen;
+		for (unsigned int i = 0; i < meshPool.size(); i++)
+		{
+			meshGen.subsectMesh(meshPool[i]);
+		}
+	}
+	void addMeshToPool(mesh m) {
+		meshPool.insert(meshPool.end(), m);
+	}
+	
 	vec3d crossProduct(vec3d a, vec3d b) {
 		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
 		return result;
@@ -158,7 +191,18 @@ public:
 			}
 		}
 	}
-
+	void drawRasterizedTriangleSdl(triangle3d t, Color c) {
+		SDL_Color c1 = { c.r, c.g, c.b, c.a };
+		SDL_Color c2 = { c.r - 30, c.g - 30, c.b , c.a };
+		SDL_Color c3 = { c.r - 70, c.g - 70, c.b , c.a };
+		vector< SDL_Vertex > verts =
+		{
+			{ SDL_FPoint{ t.p[0].x, t.p[0].y}, SDL_Color{ 255, 0, 0, 255 }, SDL_FPoint{0},},
+			{ SDL_FPoint{  t.p[1].x, t.p[1].y },  SDL_Color{ 0, 255, 0, 255 }, SDL_FPoint{ 0 }, },
+			{ SDL_FPoint{  t.p[2].x, t.p[2].y },  SDL_Color{ 0, 0, 255, 255 }, SDL_FPoint{ 0 }, },
+		};
+		SDL_RenderGeometry(renderer, nullptr, verts.data(), verts.size(), nullptr, 0);
+	}
 	float fgetMax(vector<float> v) {
 		float max = v[0];
 		for (auto f : v) {
@@ -201,6 +245,135 @@ public:
 			out.x /= w;
 			out.y /= w;
 			out.z /= w;
+		}
+	}
+	void clearMeshPool() {
+		meshPool.clear();
+	}
+	void rotateMesh(int i) {
+		if (i <= meshPool.size()) {
+			triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX;
+			for (auto tri : meshPool[i].tris) {
+				for (int i = 0; i < 3; i++) {
+					MultiplyMatVec(tri.p[i], triRotatedZ.p[i], matRotZ);
+					MultiplyMatVec(triRotatedZ.p[i], triRotatedX.p[i], matRotX);
+					triRotatedX.p[i].x += meshPool[i].position.x;
+					triRotatedX.p[i].y += meshPool[i].position.y;
+					triRotatedX.p[i].z += meshPool[i].position.z;
+				}
+			}
+		}
+	}
+	void renderMesh(bool wireFrame,float time) {
+		for (auto mesh : meshPool) {
+			matRotZ.m[0][0] = cosf(time);
+			matRotZ.m[0][1] = sinf(time);
+			matRotZ.m[1][0] = -sinf(time);
+			matRotZ.m[1][1] = cosf(time);
+			matRotZ.m[2][2] = matRotZ.m[3][3] = 1;
+
+
+			matRotX.m[1][1] = cosf(time );
+			matRotX.m[1][2] = sinf(time );
+			matRotX.m[2][1] = -sinf(time);
+			matRotX.m[2][2] = cosf(time);
+			matRotX.m[0][0] = matRotX.m[3][3] = 1;
+			/*DELETE ROT
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					matRotX.m[i][j] = 1;
+					matRotZ.m[i][j] = 1;
+				}
+			}
+			*/
+
+			for (auto tri : mesh.tris) {
+				triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX,triFixedRotatedX, triFixedRotatedZ;
+
+
+				for (int i = 0; i < 3; i++) {
+					//MultiplyMatVec(tri.p[i], triRotatedZ.p[i], matRotZ);
+					MultiplyMatVec(tri.p[i], triRotatedX.p[i], matRotX);
+
+				}
+				if (!mesh.continiusRotation) {
+					triRotatedX = tri;
+				}
+
+
+				//Update Rotation
+				mat4x4 FixedMatRotX;
+				FixedMatRotX.m[1][1] = cosf(mesh.rotation.x);
+				FixedMatRotX.m[1][2] = sinf(mesh.rotation.x);
+				FixedMatRotX.m[2][1] =-sinf(mesh.rotation.x);
+				FixedMatRotX.m[2][2] = cosf(mesh.rotation.x);
+				FixedMatRotX.m[0][0] = FixedMatRotX.m[3][3] = 1;
+				for(int i = 0; i < 3; i++) {
+					MultiplyMatVec(triRotatedX.p[i], triFixedRotatedX.p[i], FixedMatRotX);
+				}
+				
+
+				mat4x4 FixedMatRotZ;
+				FixedMatRotZ.m[0][0] = cosf(mesh.rotation.z);
+				FixedMatRotZ.m[0][1] = sinf(mesh.rotation.z);
+				FixedMatRotZ.m[1][0] = -sinf(mesh.rotation.z);
+				FixedMatRotZ.m[1][1] = cosf(mesh.rotation.z);
+				FixedMatRotZ.m[2][2] = FixedMatRotZ.m[3][3] = 1;
+				for (int i = 0; i < 3; i++) {
+					MultiplyMatVec(triFixedRotatedX.p[i], triFixedRotatedZ.p[i], FixedMatRotZ);
+				}
+
+				
+
+				for (int i = 0; i < 3; i++) {
+					triFixedRotatedZ.p[i].x += mesh.position.x;
+					triFixedRotatedZ.p[i].y += mesh.position.y;
+					triFixedRotatedZ.p[i].z += mesh.position.z;
+				}
+				triTranslated = triFixedRotatedZ;
+
+
+				
+
+				//normals 
+				vec3d normal, line1, line2;
+				line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
+				line1.y = triTranslated.p[1].y - triTranslated.p[0].y;
+				line1.z = triTranslated.p[1].z - triTranslated.p[0].z;
+				line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
+				line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
+				line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
+				normal = crossProduct(line1, line2);
+				float normalLenght = sqrtf(powf(normal.x, 2) + powf(normal.y, 2) + powf(normal.z, 2));
+				normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
+
+
+
+				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
+					normal.y * (triTranslated.p[0].y - vCamera.y) +
+					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
+
+					MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
+					MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
+					MultiplyMatVec(triTranslated.p[2], triProjected.p[2], projMatrix);
+
+
+					//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
+					triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
+					triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
+					triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
+
+					triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
+					triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
+					triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
+					if (wireFrame)drawTriangle(triProjected, mesh.color);
+					else {
+						drawRasterizedTriangleSdl(triProjected, mesh.color);
+						//w.drawTriangle(triProjected, {255,255,255,255});
+					}
+				}
+
+			}
 		}
 	}
 

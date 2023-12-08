@@ -4,15 +4,19 @@
 
 
 using namespace std;
+const Color COLOR_BLUE = { 0,0,255,255 };
+const Color COLOR_RED = { 255,0,0,255 };
+const Color COLOR_WHITE = { 255,255,255,255 };
 
 int main(int argc, char* argv[]) {
 	WindowManager w;
-	Color c = {0,0,100,255};
+	
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
 	bool wireFrame = true;
 	meshGenerator meshGen;
-	mesh cube = meshGen.creatCube(1.0f);
+	mesh cube = meshGen.creatRect(2.f,0.2f);
+	
 	mesh pyramid = meshGen.createPyramid(1.0f);
 
 	//Main loop flag
@@ -22,20 +26,19 @@ int main(int argc, char* argv[]) {
 	float time = 0;
 	mat4x4 matRotX, matRotZ;
 	
-	
-
-
-
-	
-	
-	
-		float dirX = 1.f;
-		float dirY = 1.f;
-		float dirZ = 1.f;
-		float speed = 0;
+	vec3d cubePosition = { 0.f,0.f,3.f };
+	float dirX = 1.f;
+	float dirY = 1.f;
+	float dirZ = 1.f;
+	float speed = 0;
+	cube.color = COLOR_BLUE;
+	w.addMeshToPool(cube);
+	vec3d cubeRotation = { 0.f,0.f,0.f };
+	bool rotate = false;
+	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	while (!quit) {
-		
 		time +=0.01;
+		
 		while (SDL_PollEvent(&e) != 0)
 		{
 			//User requests quit
@@ -43,106 +46,60 @@ int main(int argc, char* argv[]) {
 			{
 				quit = true;
 			}
+			if (e.type== SDL_MOUSEWHEEL) {
+				if (e.wheel.y > 0) // scroll up
+				{
+					cubeRotation.x -= 0.1;
+				}
+				else if (e.wheel.y < 0) // scroll down
+				{
+					cubeRotation.x += 0.1;
+				}
+				if (e.wheel.x > 0) // scroll right
+				{
+					cubeRotation.z -= 0.1;
+				}
+				else if (e.wheel.x < 0) // scroll left
+				{
+					cubeRotation.z += 0.1;
+				}
+			}
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_SPACE) {
-					meshGen.subsectMesh(cube);
+					w.subsetAllMesh();
+					
 				}
 				if (e.key.keysym.sym == SDLK_q) {
 					wireFrame = abs(wireFrame - 1);
 					
 				}
-			}
-		}
-		vec3d vCamera = { 0,0,0 };
-		matRotZ.m[0][0] = cosf(time);
-		matRotZ.m[0][1] = sinf(time);
-		matRotZ.m[1][0] = -sinf(time);
-		matRotZ.m[1][1] = cosf(time);
-		matRotZ.m[2][2] = matRotZ.m[3][3] = 1;
 
+				
 
-		matRotX.m[1][1] = cosf(time * 0.5f);
-		matRotX.m[1][2] = sinf(time * 0.5f);
-		matRotX.m[2][1] = -sinf(time * 0.5f);
-		matRotX.m[2][2] = cosf(time * 0.5f);
-		matRotX.m[0][0] = matRotX.m[3][3] = 1;
+				if (e.key.keysym.sym == SDLK_d) {
+					cubePosition.x += 0.04;
 
+				}
+				if (e.key.keysym.sym == SDLK_a) {
+					cubePosition.x -= 0.04;
 
+				}
+				if (e.key.keysym.sym == SDLK_w) {
+					cubePosition.y -= 0.04;
 
-		
-		//Draw some triangles
-		for (auto tri : cube.tris) {
-			
-			triangle3d triProjected, triTranslated,triRotatedZ,triRotatedX;
+				}
+				if (e.key.keysym.sym == SDLK_s) {
+					cubePosition.y += 0.04;
 
-			w.MultiplyMatVec(tri.p[0], triRotatedZ.p[0], matRotZ);//Proietta un singolo triangolo
-			w.MultiplyMatVec(tri.p[1], triRotatedZ.p[1], matRotZ);
-			w.MultiplyMatVec(tri.p[2], triRotatedZ.p[2], matRotZ);
-
-			w.MultiplyMatVec(triRotatedZ.p[0], triRotatedX.p[0], matRotX);//Proietta un singolo triangolo
-			w.MultiplyMatVec(triRotatedZ.p[1], triRotatedX.p[1], matRotX);
-			w.MultiplyMatVec(triRotatedZ.p[2], triRotatedX.p[2], matRotX);
-
-
-
-
-
-			triTranslated = triRotatedX;
-			triTranslated.p[0].z = triRotatedX.p[0].z +3.f;
-			triTranslated.p[1].z = triRotatedX.p[1].z + 3.f;
-			triTranslated.p[2].z = triRotatedX.p[2].z + 3.f;
-			
-			
-			triTranslated.p[0].y += 0.3f*sinf(time*2);
-			triTranslated.p[1].y += 0.3f*sinf(time * 2);
-			triTranslated.p[2].y += 0.3f*sinf(time * 2);
-			triTranslated.p[0].x += 0.3f*cosf(time * 2);
-			triTranslated.p[1].x += 0.3f*cosf(time * 2);
-			triTranslated.p[2].x += 0.3f*cosf(time * 2);
-			
-			
-
-
-
-			//normals 
-			vec3d normal, line1, line2;
-			line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
-			line1.y = triTranslated.p[1].y - triTranslated.p[0].y;
-			line1.z = triTranslated.p[1].z - triTranslated.p[0].z;
-			line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
-			line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
-			line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
-			normal = w.crossProduct(line1, line2);
-			float normalLenght = sqrtf(powf(normal.x,2)+ powf(normal.y, 2)+ powf(normal.z, 2));
-			normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
-
-
-		
-			if((normal.x*(triTranslated.p[0].x-vCamera.x)+
-				normal.y * (triTranslated.p[0].y - vCamera.y)+
-				normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
-
-				w.MultiplyMatVec(triTranslated.p[0], triProjected.p[0], w.projMatrix);//Proietta un singolo triangolo
-				w.MultiplyMatVec(triTranslated.p[1], triProjected.p[1], w.projMatrix);
-				w.MultiplyMatVec(triTranslated.p[2], triProjected.p[2], w.projMatrix);
-			
-
-				//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
-				triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
-				triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
-				triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
-
-				triProjected.p[0].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)w.getScreenWidth();
-				triProjected.p[1].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)w.getScreenWidth();
-				triProjected.p[2].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)w.getScreenWidth();
-				if (wireFrame)w.drawTriangle(triProjected, c);
-				else {
-					w.drawRasterizedTriangle(triProjected, c);
-					//w.drawTriangle(triProjected, {255,255,255,255});
 				}
 			}
-			
 		}
+
+		vec3d vCamera = { 0,0,0 };
+		w.updateMeshPosition(0, cubePosition);
+		w.updateMeshRotationDegrees(0, cubeRotation);
+		w.renderMesh( wireFrame, time);
+
 		
 		
 

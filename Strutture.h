@@ -25,6 +25,10 @@ struct triangle3d {
 };
 struct mesh {
 	vector<triangle3d> tris;
+	Color color;
+	vec3d position = { 0,0,0 };
+	vec3d rotation = { 0,0,0 };
+	bool continiusRotation = false;
 };
 struct mat4x4 {
 	float m[4][4] = { 0 };
@@ -35,6 +39,7 @@ private:
 public:
 	
 	vector<int> getHypotenuse(triangle3d tri) { //This function get a triangle and returns de index of the 2 points of the hypotenuse
+
 		float dist01 = sqrtf(powf((tri.p[1].x - tri.p[0].x),2)+ powf((tri.p[1].y - tri.p[0].y), 2)
 			+ powf((tri.p[1].z - tri.p[0].z), 2));
 		float dist02 = sqrtf(powf((tri.p[2].x - tri.p[0].x), 2) + powf((tri.p[2].y - tri.p[0].y), 2)
@@ -47,19 +52,26 @@ public:
 			v.push_back(1);
 			v.push_back(2);
 			ord = 1;
+			return v;
 		}
 		if ((dist12 > dist02) && (dist12 > dist01)) {
 			v.push_back(1);
 			v.push_back(2);
 			v.push_back(0);
 			ord = 2;
+			return v;
 		}
 		if ((dist02 > dist01) && (dist02 > dist12)) {
 			v.push_back(0);
 			v.push_back(2);
 			v.push_back(1);
 			ord = 3;
+			return v;
 		}
+		v.push_back(0);
+		v.push_back(1);
+		v.push_back(2);
+		ord = 1;
 		return v;
 	}
 
@@ -119,33 +131,67 @@ public:
 		}
 		o.tris = newTris;
 	}
+	 static mesh creatRect(float w,float h) {
+		 mesh meshRect;
+		 float start = w * -0.5f;
+		 meshRect.tris = {
+
+			 // SOUTH
+			 { start, start, start,		start, h, start,    w, h, start },
+			{ start, start, start,		w, h, start,		 w, start,start },
+
+			// EAST                                                      
+			{ w, start, start,    w, h, start,    w, h, w },
+			{ w, start, start,    w, h, w,     w, start, w },
+
+			// NORTH                                                
+			{ w, start, w,    w, h, w,    start, h, w },
+			{ w, start, w,    start, h, w,    start, start, w },
+
+			// WEST                                                  
+			{ start, start, w,    start, h, w,    start, h, start },
+			{ start, start, w,    start, h, start,    start, start, start },
+
+			// TOP                                                   
+			{ start, h, start,    start, h, w,    w, h, w },
+			{ start, h, start,    w, h, w,     w, h, start },
+
+			// BOTTOM                                                    
+			{ w, start, w,    start, start, w,    start, start, start },
+			{ w, start, w,    start, start, start,    w, start, start },
+
+		 };
+
+		 return meshRect;
+	 }
 	static mesh creatCube(float size) {
 		mesh meshCube;
+		float start =size * -0.5f;
 		meshCube.tris = {
 			                                                                                                                                                                                                          
 			// SOUTH
-			{ 0.0f, 0.0f, 0.0f,    0.0f, size, 0.0f,    size, size, 0.0f },
-			{ 0.0f, 0.0f, 0.0f,    size, size, 0.0f,    size, 0.0f, 0.0f },
+			{ start, start, start,    start, size, start,    size, size, start },
+			{ start, start, start,    size, size, start,    size, start,start },
 
 			// EAST                                                      
-			{ size, 0.0f, 0.0f,    size, size, 0.0f,    size, size, size },
-			{ size, 0.0f, 0.0f,    size, size, size,    size, 0.0f, size },
+			{ size, start, start,    size, size, start,    size, size, size },
+			{ size, start, start,    size, size, size,    size, start, size },
 
 			// NORTH                                                
-			{ size, 0.0f, size,    size, size, size,    0.0f, size, size },
-			{ size, 0.0f, size,    0.0f, size, size,    0.0f, 0.0f, size },
+			{ size, start, size,    size, size, size,    start, size, size },
+			{ size, start, size,    start, size, size,    start, start, size },
 
 			// WEST                                                  
-			{ 0.0f, 0.0f, size,    0.f, size, size,    0.0f, size, 0.0f },
-			{ 0.0f, 0.0f, size,    0.0f, size, 0.0f,    0.0f, 0.0f, 0.0f },
+			{ start, start, size,    start, size, size,    start, size, start },
+			{ start, start, size,    start, size, start,    start, start, start },
 
 			// TOP                                                   
-			{ 0.0f, size, 0.0f,    0.0f, size, size,    size, size, size },
-			{ 0.0f, size, 0.0f,    size, size, size,    size, size, 0.0f },
+			{ start, size, start,    start, size, size,    size, size, size },
+			{ start, size, start,    size, size, size,    size, size, start },
 
 			// BOTTOM                                                    
-			{ size, 0.0f, size,    0.0f, 0.0f, size,    0.0f, 0.0f, 0.0f },
-			{ size, 0.0f, size,    0.0f, 0.0f, 0.0f,    size, 0.0f, 0.0f },
+			{ size, start, size,    start, start, size,    start, start, start },
+			{ size, start, size,    start, start, start,    size, start, start },
 
 		};
 		
