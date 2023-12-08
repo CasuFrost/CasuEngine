@@ -93,11 +93,17 @@ int main(int argc, char* argv[]) {
 			triTranslated.p[2].z = triRotatedX.p[2].z + 3.f;
 			
 			
-			triTranslated.p[0].z += (time * speed);
-			triTranslated.p[1].z += (time * speed);
-			triTranslated.p[2].z += (time * speed);
+			triTranslated.p[0].y += 0.3f*sinf(time*2);
+			triTranslated.p[1].y += 0.3f*sinf(time * 2);
+			triTranslated.p[2].y += 0.3f*sinf(time * 2);
+			triTranslated.p[0].x += 0.3f*cosf(time * 2);
+			triTranslated.p[1].x += 0.3f*cosf(time * 2);
+			triTranslated.p[2].x += 0.3f*cosf(time * 2);
 			
 			
+
+
+
 			//normals 
 			vec3d normal, line1, line2;
 			line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
@@ -112,9 +118,9 @@ int main(int argc, char* argv[]) {
 
 
 		
-			if(normal.x*(triTranslated.p[0].x-vCamera.x)+
+			if((normal.x*(triTranslated.p[0].x-vCamera.x)+
 				normal.y * (triTranslated.p[0].y - vCamera.y)+
-				normal.z * (triTranslated.p[0].z - vCamera.z) <  0.f) {
+				normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
 
 				w.MultiplyMatVec(triTranslated.p[0], triProjected.p[0], w.projMatrix);//Proietta un singolo triangolo
 				w.MultiplyMatVec(triTranslated.p[1], triProjected.p[1], w.projMatrix);

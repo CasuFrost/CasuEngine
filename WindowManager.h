@@ -6,8 +6,8 @@ class WindowManager {
 private :
 	SDL_Renderer* renderer;
 	//window size
-	int width = 800;
-	int height = 800;
+	int width = 1000;
+	int height = 1000;
 
 	bool is_top_left(vec2d a, vec2d b) {
 		vec2d edge = { b.x - a.x,b.y - a.y };

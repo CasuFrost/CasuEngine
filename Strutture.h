@@ -31,8 +31,10 @@ struct mat4x4 {
 };
 static class meshGenerator {
 private:
+	 int ord = 1;
 public:
-	static vector<int> getHypotenuse(triangle3d tri) { //This function get a triangle and returns de index of the 2 points of the hypotenuse
+	
+	vector<int> getHypotenuse(triangle3d tri) { //This function get a triangle and returns de index of the 2 points of the hypotenuse
 		float dist01 = sqrtf(powf((tri.p[1].x - tri.p[0].x),2)+ powf((tri.p[1].y - tri.p[0].y), 2)
 			+ powf((tri.p[1].z - tri.p[0].z), 2));
 		float dist02 = sqrtf(powf((tri.p[2].x - tri.p[0].x), 2) + powf((tri.p[2].y - tri.p[0].y), 2)
@@ -44,16 +46,19 @@ public:
 			v.push_back(0);
 			v.push_back(1);
 			v.push_back(2);
+			ord = 1;
 		}
 		if ((dist12 > dist02) && (dist12 > dist01)) {
 			v.push_back(1);
 			v.push_back(2);
 			v.push_back(0);
+			ord = 2;
 		}
 		if ((dist02 > dist01) && (dist02 > dist12)) {
 			v.push_back(0);
 			v.push_back(2);
 			v.push_back(1);
+			ord = 3;
 		}
 		return v;
 	}
@@ -68,16 +73,49 @@ public:
 		mid.z *= 0.5f;
 		return mid;
 	}
-	static void subsectMesh(mesh &o) {
+
+	/*
+	Quando prendo un triangolo e creo i due nuovi triangoli, per selezionare il lato dell'ipotenusa come 
+	dalla quale selezionare il midpoint, inverto l'ordine dei vertici del triangolo, ciò causa un problema nel momento 
+	in cui necessito di calcolare il vettore normale, in quanto per i triangoli che hanno i vertici ordinati diversamente, la 
+	normale risulta inversa, quindi ho bisogno di tener conto dell'ordine, ed in base a come ho selezionato i vertici, disporli diversamente.
+	*/
+	vector<triangle3d> getOrderedTriangle(triangle3d tri, vec3d mid,vector<int> hypVertices) {
+		triangle3d tri1;
+		triangle3d tri2;
+		switch (ord)
+		{
+		case 1:
+			tri1 = { tri.p[hypVertices[2]],tri.p[hypVertices[0]],mid };
+			tri2 = { mid,tri.p[hypVertices[1]],tri.p[hypVertices[2]] };
+			break;
+		case 2:
+			tri1 = { mid,tri.p[hypVertices[1]],tri.p[hypVertices[2]] };
+			tri2 = { tri.p[hypVertices[2]],tri.p[hypVertices[0]] ,mid };
+			break;
+		case 3:
+			tri1 = { mid,tri.p[hypVertices[0]],tri.p[hypVertices[2]] };
+			tri2 = { tri.p[hypVertices[2]],tri.p[hypVertices[1]] ,mid };
+			break;
+		default:
+			break;
+		}
+		return { tri1,tri2 };
+	}
+
+	 void subsectMesh(mesh &o) {
 		vector<triangle3d> newTris;
 		for (auto tri : o.tris) {
 			vector<int> hypVertices = getHypotenuse(tri);
 			//Divido il triangolo creado il "midPoint" nel lato dell'ipotenusa
+
 			vec3d mid = midPointVector3D(tri.p[hypVertices[0]], tri.p[hypVertices[1]]);//divide tri
-			triangle3d tri1 = { tri.p[hypVertices[0]],mid,tri.p[hypVertices[2]]};
-			triangle3d tri2 = { tri.p[hypVertices[1]],mid,tri.p[hypVertices[2]]};
-			newTris.insert(newTris.end(), tri1);
-			newTris.insert(newTris.end(), tri2);
+			vector<triangle3d> newTriangles= getOrderedTriangle(tri, mid, hypVertices);
+			
+			
+			
+			newTris.insert(newTris.end(), newTriangles[0]);
+			newTris.insert(newTris.end(), newTriangles[1]);
 		}
 		o.tris = newTris;
 	}
