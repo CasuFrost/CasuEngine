@@ -29,19 +29,32 @@ private :
 		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
 		return result;
 	}
-
+	bool is_top_left(vec2d a, vec2d b) {
+		vec2d edge = { b.x - a.x,b.y - a.y };
+		bool is_top_edge = edge.y == 0 && edge.x > 0;
+		bool is_left_edge = edge.y < 0;
+		return is_top_edge || is_left_edge;
+	}
+	bool is_top_left(vec3d v1, vec3d v2) {
+		vec2d a = { v1.x,v1.y };
+		vec2d b = { v2.x,v2.y };
+		vec2d edge = { b.x - a.x,b.y - a.y };
+		bool is_top_edge = edge.y == 0 && edge.x > 0;
+		bool is_left_edge = edge.y < 0;
+		return is_top_edge || is_left_edge;
+	}
 	float edge_cross(vec2d a, vec2d b, vec2d p) {
 		vec2d ab = { b.x - a.x,b.y - a.y };
 		vec2d ap = { p.x - a.x,p.y - a.y };
-		return ab.x*ap.y-ab.y*ap.x;
+		return crossProduct(ab,ap).z;
 	}
-	bool pointIsInTriangle(triangle3d tri, vec2d p) {
+	bool pointIsInTriangle(triangle3d tri, vec2d p,int b0,int b1, int b2) {
 		vec2d v0 = { tri.p[0].x,tri.p[0].y };
 		vec2d v1 = { tri.p[1].x,tri.p[1].y };
 		vec2d v2 = { tri.p[2].x,tri.p[2].y };
-		float w_0 = edge_cross(v1,v2,p);
-		float w_1 = edge_cross(v2, v0, p);
-		float w_2 = edge_cross(v0, v1, p);
+		float w_0 = edge_cross(v1,v2,p)+b0;
+		float w_1 = edge_cross(v2, v0, p)+b1;
+		float w_2 = edge_cross(v0, v1, p)+b2;
 		
 		return w_0 >= 0 && w_1 >= 0 && w_2 >= 0;
 	}
@@ -129,10 +142,16 @@ public:
 		int xMax = fgetMax(xCords);
 		int yMin = fgetMin(yCords);
 		int yMax = fgetMax(yCords);
+
+		int bias0 = is_top_left(t.p[1],t.p[2]) ? 0 : -1;
+		int bias1 = is_top_left(t.p[2], t.p[0]) ? 0 : -1;
+		int bias2 = is_top_left(t.p[0], t.p[1]) ? 0 : -1;
+
+
 		for (int y = yMin; y <= yMax; y++) {
 			for (int x = xMin; x <= xMax; x++) {
 				vec2d point = { x,y };
-				if (pointIsInTriangle(t,point)) {
+				if (pointIsInTriangle(t,point, bias0, bias1, bias2)) {
 					SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 					SDL_RenderDrawPoint(renderer, point.x, point.y);
 				}

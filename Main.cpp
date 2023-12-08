@@ -7,10 +7,10 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	WindowManager w;
-	Color c = {255,0,0,255};
+	Color c = {0,0,100,255};
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
-	
+	bool wireFrame = false;
 	meshGenerator meshGen;
 	mesh cube = meshGen.creatCube(1.0f);
 	mesh pyramid = meshGen.createPyramid(1.0f);
@@ -46,6 +46,10 @@ int main(int argc, char* argv[]) {
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_SPACE) {
 					meshGen.subsectMesh(cube);
+				}
+				if (e.key.keysym.sym == SDLK_q) {
+					wireFrame = abs(wireFrame - 1);
+					
 				}
 			}
 		}
@@ -109,8 +113,8 @@ int main(int argc, char* argv[]) {
 			triProjected.p[0].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)w.getScreenWidth();
 			triProjected.p[1].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)w.getScreenWidth();
 			triProjected.p[2].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)w.getScreenWidth();
-			
-			w.drawRasterizedTriangle(triProjected, c);
+			if (wireFrame)w.drawTriangle(triProjected, c);
+			else w.drawRasterizedTriangle(triProjected, c);
 		}
 		
 		
