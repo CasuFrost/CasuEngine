@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	Color c = {0,0,100,255};
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
-	bool wireFrame = false;
+	bool wireFrame = true;
 	meshGenerator meshGen;
 	mesh cube = meshGen.creatCube(1.0f);
 	mesh pyramid = meshGen.createPyramid(1.0f);
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-		
+		vec3d vCamera = { 0,0,0 };
 		matRotZ.m[0][0] = cosf(time);
 		matRotZ.m[0][1] = sinf(time);
 		matRotZ.m[1][0] = -sinf(time);
@@ -98,28 +98,49 @@ int main(int argc, char* argv[]) {
 			triTranslated.p[2].z += (time * speed);
 			
 			
+			//normals 
+			vec3d normal, line1, line2;
+			line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
+			line1.y = triTranslated.p[1].y - triTranslated.p[0].y;
+			line1.z = triTranslated.p[1].z - triTranslated.p[0].z;
+			line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
+			line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
+			line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
+			normal = w.crossProduct(line1, line2);
+			float normalLenght = sqrtf(powf(normal.x,2)+ powf(normal.y, 2)+ powf(normal.z, 2));
+			normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
 
 
-			w.MultiplyMatVec(triTranslated.p[0], triProjected.p[0], w.projMatrix);//Proietta un singolo triangolo
-			w.MultiplyMatVec(triTranslated.p[1], triProjected.p[1], w.projMatrix);
-			w.MultiplyMatVec(triTranslated.p[2], triProjected.p[2], w.projMatrix);
+		
+			if(normal.x*(triTranslated.p[0].x-vCamera.x)+
+				normal.y * (triTranslated.p[0].y - vCamera.y)+
+				normal.z * (triTranslated.p[0].z - vCamera.z) <  0.f) {
+
+				w.MultiplyMatVec(triTranslated.p[0], triProjected.p[0], w.projMatrix);//Proietta un singolo triangolo
+				w.MultiplyMatVec(triTranslated.p[1], triProjected.p[1], w.projMatrix);
+				w.MultiplyMatVec(triTranslated.p[2], triProjected.p[2], w.projMatrix);
 			
 
-			//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
-			triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
-			triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
-			triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
+				//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
+				triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
+				triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
+				triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
 
-			triProjected.p[0].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)w.getScreenWidth();
-			triProjected.p[1].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)w.getScreenWidth();
-			triProjected.p[2].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)w.getScreenWidth();
-			if (wireFrame)w.drawTriangle(triProjected, c);
-			else w.drawRasterizedTriangle(triProjected, c);
+				triProjected.p[0].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)w.getScreenWidth();
+				triProjected.p[1].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)w.getScreenWidth();
+				triProjected.p[2].x *= 0.5 * (float)w.getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)w.getScreenWidth();
+				if (wireFrame)w.drawTriangle(triProjected, c);
+				else {
+					w.drawRasterizedTriangle(triProjected, c);
+					//w.drawTriangle(triProjected, {255,255,255,255});
+				}
+			}
+			
 		}
 		
 		
 
-
+		SDL_Delay(20);
 		w.endLoop();
 	}
 	

@@ -9,26 +9,6 @@ private :
 	int width = 800;
 	int height = 800;
 
-	vec3d crossProduct(vec3d a, vec3d b) {
-		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
-		return result;
-	}
-	vec3d crossProduct(vec2d v1, vec2d v2) {
-		vec3d a = { v1.x,v1.y,0 };
-		vec3d b = { v2.x,v2.y,0 };
-		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
-		return result;
-	}
-	vec3d crossProduct(vec3d a, vec2d v2) {
-		vec3d b = { v2.x,v2.y,0 };
-		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
-		return result;
-	}
-	vec3d crossProduct(vec2d v1, vec3d b) {
-		vec3d a = { v1.x,v1.y,0 };
-		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
-		return result;
-	}
 	bool is_top_left(vec2d a, vec2d b) {
 		vec2d edge = { b.x - a.x,b.y - a.y };
 		bool is_top_edge = edge.y == 0 && edge.x > 0;
@@ -59,6 +39,26 @@ private :
 		return w_0 >= 0 && w_1 >= 0 && w_2 >= 0;
 	}
 public:
+	vec3d crossProduct(vec3d a, vec3d b) {
+		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
+		return result;
+	}
+	vec3d crossProduct(vec2d v1, vec2d v2) {
+		vec3d a = { v1.x,v1.y,0 };
+		vec3d b = { v2.x,v2.y,0 };
+		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
+		return result;
+	}
+	vec3d crossProduct(vec3d a, vec2d v2) {
+		vec3d b = { v2.x,v2.y,0 };
+		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
+		return result;
+	}
+	vec3d crossProduct(vec2d v1, vec3d b) {
+		vec3d a = { v1.x,v1.y,0 };
+		vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };
+		return result;
+	}
 	SDL_Window *window;
 	//Projection Matrix
 	float fNear = 0.1f;
