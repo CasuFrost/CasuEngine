@@ -1,12 +1,9 @@
 #include <iostream>
 
-#include "WindowManager.h"
+#include "UserInterface.h"
 
 
 using namespace std;
-const Color COLOR_BLUE = { 0,0,255,255 };
-const Color COLOR_RED = { 255,0,0,255 };
-const Color COLOR_WHITE = { 255,255,255,255 };
 
 int main(int argc, char* argv[]) {
 	WindowManager w;
@@ -41,7 +38,9 @@ int main(int argc, char* argv[]) {
 	cube.rotation = cubeRotation;
 	cube.position = cubePosition;
 	cube.color = COLOR_RED;
-	//w.addMeshToPool(cube);
+	w.addMeshToPool(cube);
+	int selected = 0;
+	UserInterface ui;
 	while (!quit) {
 		time +=0.01;
 		
@@ -72,14 +71,14 @@ int main(int argc, char* argv[]) {
 			}
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_SPACE) {
-					w.subsetMesh(0);
+					w.subsetMesh(selected);
 					
 				}
 				if (e.key.keysym.sym == SDLK_q) {
 					wireFrame = abs(wireFrame - 1);
 				}
 				if (e.key.keysym.sym == SDLK_m) {
-					w.makeWater(0);
+					w.makeWater(selected);
 				}
 				
 				if (e.key.keysym.sym == SDLK_DOWN) {
@@ -111,14 +110,16 @@ int main(int argc, char* argv[]) {
 		}
 
 		vec3d vCamera = { 0,0,0 };
-		w.updateMeshPosition(0, cubePosition);
-		w.updateMeshRotationDegrees(0, cubeRotation);
+		w.updateMeshPosition(selected, cubePosition);
+		w.updateMeshRotationDegrees(selected, cubeRotation);
 		w.renderMesh( wireFrame, time);
 
 		
 		
 
 		//SDL_Delay(10);
+		ui.display(w, selected);
+		
 		w.endLoop();
 	}
 	

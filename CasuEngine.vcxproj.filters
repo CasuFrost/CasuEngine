@@ -32,5 +32,8 @@
     <ClInclude Include="meshGenerator.h">
       <Filter>File di risorse\Libs</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>File di risorse\Libs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

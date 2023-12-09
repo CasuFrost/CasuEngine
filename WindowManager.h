@@ -46,6 +46,12 @@ private :
 		return a;
 	}
 public:
+	vec3d getMeshPosition(int i) {
+		return meshPool[i].position;
+	}
+	vec3d getMeshRotation(int i) {
+		return meshPool[i].rotation;
+	}
 	void makeWater(int i) {
 		if (meshPool[i].water)return;
 		meshGenerator genMesh;

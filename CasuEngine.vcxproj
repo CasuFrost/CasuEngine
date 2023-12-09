@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="meshGenerator.h" />
     <ClInclude Include="Strutture.h" />
+    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
