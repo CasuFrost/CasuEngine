@@ -1,5 +1,6 @@
 #include <vector>
 #include <math.h>
+
 using namespace std;
 struct Color {
 	int r;
@@ -15,6 +16,7 @@ struct vec3d {
 	float x,y,z;
 	
 };
+static vec2d mousePos;
 struct Triangle {
 	vec2d p1;
 	vec2d p2;

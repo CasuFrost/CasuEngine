@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	float dirZ = 1.f;
 	float speed = 0;
 	rect.color = COLOR_BLUE;
-	w.addMeshToPool(rect);
+	//w.addMeshToPool(rect);
 	vec3d cubeRotation = { 0.f,0.f,0.f };
 	bool rotate = false;
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
@@ -41,15 +41,24 @@ int main(int argc, char* argv[]) {
 	w.addMeshToPool(cube);
 	int selected = 0;
 	UserInterface ui;
+	int xMouse = 0; int yMouse = 0;
 	while (!quit) {
-		time +=0.01;
-		
+		time +=0.01;	
 		while (SDL_PollEvent(&e) != 0)
 		{
+			
+			
+			SDL_GetMouseState(&xMouse, &yMouse);
+			if (xMouse * yMouse != 0) {
+				mousePos = { xMouse ,yMouse };
+			}
 			//User requests quit
 			if (e.type == SDL_QUIT)
 			{
 				quit = true;
+			}
+			if (e.type == SDL_MOUSEBUTTONDOWN) {
+				ui.checkInputButton(selected,w);
 			}
 			if (e.type== SDL_MOUSEWHEEL) {
 				if (e.wheel.y > 0) // scroll up
@@ -108,7 +117,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-
+		
 		vec3d vCamera = { 0,0,0 };
 		w.updateMeshPosition(selected, cubePosition);
 		w.updateMeshRotationDegrees(selected, cubeRotation);

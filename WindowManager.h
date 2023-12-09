@@ -164,6 +164,9 @@ public:
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		initializeMatrix();
 	}
+	int getMeshPoolSize() {
+		return meshPool.size();
+	}
 	void render() {
 		SDL_SetRenderDrawColor(renderer,0, 0, 0, 0);
 		SDL_RenderPresent(renderer);
@@ -257,8 +260,13 @@ public:
 		drawLine(pos.x + (int)size / 2, pos.y - (int)size / 2, pos.x + (int)size / 2, pos.y + (int)size / 2, c);
 	}
 	void endLoop() {
+			render();
+			clear();
+
+	}
+	void endLoop(int delay) {
 		render();
-		//SDL_Delay(10);
+		SDL_Delay(delay);
 		clear();
 		
 	}
