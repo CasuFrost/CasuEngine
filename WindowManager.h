@@ -419,7 +419,7 @@ public:
 					normal.y * (triTranslated.p[0].y - vCamera.y) +
 					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
 
-						vec3d light_direction = { 0.0f,0.f,-1.f };
+						vec3d light_direction = { 1.0f,0.f,-1.f };
 						normalizeVec(light_direction);
 						float dp = dotProdutct(normal, light_direction);
 
