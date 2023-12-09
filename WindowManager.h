@@ -46,6 +46,19 @@ private :
 		return a;
 	}
 public:
+	void makeWater(int i) {
+		if (meshPool[i].water)return;
+		meshGenerator genMesh;
+		mesh a = genMesh.creatRect(2.f, 0.05f);
+		a.position = meshPool[i].position;
+		a.rotation = meshPool[i].rotation;
+		a.color = {0,0,255,255};
+		meshPool[i] = a;
+		for (int j = 0; j < 9; j++) {
+			subsetMesh(i);
+		}
+		meshPool[i].water = true;
+	}
 	void updateMeshPosition(int i, vec3d newPos) {
 		if (i <= meshPool.size()) {
 			meshPool[i].position = newPos;
@@ -60,6 +73,13 @@ public:
 		if (i <= meshPool.size()) {
 			meshPool[i].color = c;
 		}
+	}
+	void subsetMesh(int i) {
+		if (meshPool[i].water)return;
+		meshGenerator meshGen;
+		 
+		meshGen.subsectMesh(meshPool[i]);
+		
 	}
 	void subsetAllMesh() {
 		meshGenerator meshGen;
@@ -324,6 +344,7 @@ public:
 				}
 
 				
+				
 
 				for (int i = 0; i < 3; i++) {
 					triFixedRotatedZ.p[i].x += mesh.position.x;
@@ -346,8 +367,26 @@ public:
 				normal = crossProduct(line1, line2);
 				float normalLenght = sqrtf(powf(normal.x, 2) + powf(normal.y, 2) + powf(normal.z, 2));
 				normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
+				
+				
+				
+				//Wave
+				if (mesh.water) {
+					float f = 1;
+					if (true||normal.z==0) {
+						for (int i = 0; i < 3; i++) {
+							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z)*f);
+							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x)*f*2);
+							//triFixedRotatedZ.p[i].z += 0.1 * sinf(time * triFixedRotatedZ.p[i].y);
+						
 
-
+						}
+					}
+					else {
+					
+					}
+				}
+				
 
 				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
 					normal.y * (triTranslated.p[0].y - vCamera.y) +

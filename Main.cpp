@@ -15,8 +15,9 @@ int main(int argc, char* argv[]) {
 	//w.drawTriangle(t, c);
 	bool wireFrame = true;
 	meshGenerator meshGen;
-	mesh cube = meshGen.creatRect(2.f,0.2f);
-	
+	mesh rect = meshGen.creatRect(1.f,0.1f);
+	mesh cube = meshGen.creatCube(0.5f);
+
 	mesh pyramid = meshGen.createPyramid(1.0f);
 
 	//Main loop flag
@@ -31,11 +32,16 @@ int main(int argc, char* argv[]) {
 	float dirY = 1.f;
 	float dirZ = 1.f;
 	float speed = 0;
-	cube.color = COLOR_BLUE;
-	w.addMeshToPool(cube);
+	rect.color = COLOR_BLUE;
+	w.addMeshToPool(rect);
 	vec3d cubeRotation = { 0.f,0.f,0.f };
 	bool rotate = false;
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
+
+	cube.rotation = cubeRotation;
+	cube.position = cubePosition;
+	cube.color = COLOR_RED;
+	//w.addMeshToPool(cube);
 	while (!quit) {
 		time +=0.01;
 		
@@ -66,16 +72,25 @@ int main(int argc, char* argv[]) {
 			}
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_SPACE) {
-					w.subsetAllMesh();
+					w.subsetMesh(0);
 					
 				}
 				if (e.key.keysym.sym == SDLK_q) {
 					wireFrame = abs(wireFrame - 1);
-					
 				}
-
+				if (e.key.keysym.sym == SDLK_m) {
+					w.makeWater(0);
+				}
 				
+				if (e.key.keysym.sym == SDLK_DOWN) {
+					cubePosition.z -= 0.04;
 
+				}
+				
+				if (e.key.keysym.sym == SDLK_UP) {
+					cubePosition.z += 0.04;
+
+				}
 				if (e.key.keysym.sym == SDLK_d) {
 					cubePosition.x += 0.04;
 
@@ -103,7 +118,7 @@ int main(int argc, char* argv[]) {
 		
 		
 
-		SDL_Delay(20);
+		//SDL_Delay(10);
 		w.endLoop();
 	}
 	

@@ -29,6 +29,7 @@ struct mesh {
 	vec3d position = { 0,0,0 };
 	vec3d rotation = { 0,0,0 };
 	bool continiusRotation = false;
+	bool water = false;
 };
 struct mat4x4 {
 	float m[4][4] = { 0 };
@@ -134,31 +135,32 @@ public:
 	 static mesh creatRect(float w,float h) {
 		 mesh meshRect;
 		 float start = w * -0.5f;
+		 float start2 = h * -0.5f;
 		 meshRect.tris = {
 
 			 // SOUTH
-			 { start, start, start,		start, h, start,    w, h, start },
-			{ start, start, start,		w, h, start,		 w, start,start },
+			 { start, start2, start,		start, h, start,    w, h, start },
+			{ start, start2, start,		w, h, start,		 w, start2,start },
 
 			// EAST                                                      
-			{ w, start, start,    w, h, start,    w, h, w },
-			{ w, start, start,    w, h, w,     w, start, w },
+			{ w, start2, start,    w, h, start,    w, h, w },
+			{ w, start2, start,    w, h, w,     w, start2, w },
 
 			// NORTH                                                
-			{ w, start, w,    w, h, w,    start, h, w },
-			{ w, start, w,    start, h, w,    start, start, w },
+			{ w, start2, w,    w, h, w,    start, h, w },
+			{ w, start2, w,    start, h, w,    start, start2, w },
 
 			// WEST                                                  
-			{ start, start, w,    start, h, w,    start, h, start },
-			{ start, start, w,    start, h, start,    start, start, start },
+			{ start, start2, w,    start, h, w,		   start, h, start },
+			{ start, start2, w,    start, h, start,    start, start2, start },
 
 			// TOP                                                   
 			{ start, h, start,    start, h, w,    w, h, w },
 			{ start, h, start,    w, h, w,     w, h, start },
 
 			// BOTTOM                                                    
-			{ w, start, w,    start, start, w,    start, start, start },
-			{ w, start, w,    start, start, start,    w, start, start },
+			{ w, start2, w,    start, start2, w,    start, start2, start },
+			{ w, start2, w,    start, start2, start,    w, start2, start },
 
 		 };
 
