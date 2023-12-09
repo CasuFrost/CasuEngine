@@ -219,13 +219,13 @@ public:
 	}
 	void drawRasterizedTriangleSdl(triangle3d t, Color c) {
 		SDL_Color c1 = { c.r, c.g, c.b, c.a };
-		SDL_Color c2 = { c.r - 30, c.g - 30, c.b , c.a };
-		SDL_Color c3 = { c.r - 70, c.g - 70, c.b , c.a };
+		SDL_Color c2 = { c.r , c.g , c.b , c.a };
+		SDL_Color c3 = { c.r , c.g , c.b , c.a };
 		vector< SDL_Vertex > verts =
 		{
-			{ SDL_FPoint{ t.p[0].x, t.p[0].y}, SDL_Color{ 255, 0, 0, 255 }, SDL_FPoint{0},},
-			{ SDL_FPoint{  t.p[1].x, t.p[1].y },  SDL_Color{ 0, 255, 0, 255 }, SDL_FPoint{ 0 }, },
-			{ SDL_FPoint{  t.p[2].x, t.p[2].y },  SDL_Color{ 0, 0, 255, 255 }, SDL_FPoint{ 0 }, },
+			{ SDL_FPoint{ t.p[0].x, t.p[0].y}, c1, SDL_FPoint{0},},
+			{ SDL_FPoint{  t.p[1].x, t.p[1].y },  c1, SDL_FPoint{ 0 }, },
+			{ SDL_FPoint{  t.p[2].x, t.p[2].y },  c1, SDL_FPoint{ 0 }, },
 		};
 		SDL_RenderGeometry(renderer, nullptr, verts.data(), verts.size(), nullptr, 0);
 	}
@@ -289,6 +289,20 @@ public:
 				}
 			}
 		}
+	}
+	float dotProdutct(vec3d a, vec3d b) {
+		return a.x * b.x + a.y * b.y + a.z * b.z;
+	}
+	void normalizeVec(vec3d &normal) {
+		float normalLenght = sqrtf(powf(normal.x, 2) + powf(normal.y, 2) + powf(normal.z, 2));
+		normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
+	}
+	Color changeColorDarknes(Color c, float lum) {
+		int r = c.r * lum / 150.f;
+		int g = c.g * lum / 150.f;
+		int b = c.b * lum / 150.f;
+	
+		return {r,g,b,c.a};
 	}
 	void renderMesh(bool wireFrame,float time) {
 		for (auto mesh : meshPool) {
@@ -371,8 +385,7 @@ public:
 				line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
 				line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
 				normal = crossProduct(line1, line2);
-				float normalLenght = sqrtf(powf(normal.x, 2) + powf(normal.y, 2) + powf(normal.z, 2));
-				normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
+				normalizeVec(normal);
 				
 				
 				
@@ -398,24 +411,37 @@ public:
 					normal.y * (triTranslated.p[0].y - vCamera.y) +
 					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
 
-					MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
-					MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
-					MultiplyMatVec(triTranslated.p[2], triProjected.p[2], projMatrix);
+						vec3d light_direction = { 0.0f,0.f,-1.f };
+						normalizeVec(light_direction);
+						float dp = dotProdutct(normal, light_direction);
+
+						//calc lum
+						int lum = (int)(150.f * dp);
+						Color litghedColor = changeColorDarknes(mesh.color, lum);
+
+						
+						
+						
 
 
-					//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
-					triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
-					triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
-					triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
+						MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
+						MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
+						MultiplyMatVec(triTranslated.p[2], triProjected.p[2], projMatrix);
 
-					triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
-					triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
-					triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
-					if (wireFrame)drawTriangle(triProjected, mesh.color);
-					else {
-						drawRasterizedTriangleSdl(triProjected, mesh.color);
-						//w.drawTriangle(triProjected, {255,255,255,255});
-					}
+
+						//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
+						triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
+						triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
+						triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
+
+						triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
+						triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
+						triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
+						if (wireFrame)drawTriangle(triProjected, litghedColor);
+						else {
+							drawRasterizedTriangleSdl(triProjected, litghedColor);
+							//w.drawTriangle(triProjected, {255,255,255,255});
+						}
 				}
 
 			}

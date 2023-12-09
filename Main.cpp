@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
-	bool wireFrame = true;
+	bool wireFrame = false;
 	meshGenerator meshGen;
 	mesh rect = meshGen.creatRect(1.f,0.1f);
 	mesh cube = meshGen.creatCube(0.5f);

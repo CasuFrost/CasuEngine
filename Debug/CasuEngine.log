@@ -182,28 +182,28 @@ C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(221,31): warning C483
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(221,36): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,24): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,34): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,41): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,47): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(222,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,24): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,34): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,41): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,47): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(223,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(280,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
@@ -215,31 +215,43 @@ C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(281,29): warning C410
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(281,15): warning C4101: 'triProjected': variabile locale senza riferimenti
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(384,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(301,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(385,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(302,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(411,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(303,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(411,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(397,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(412,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(398,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(412,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(420,59): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(413,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(437,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(413,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(437,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(317,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(438,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(438,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(439,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(439,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(331,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(45,14): warning C4305: '+=': troncamento da 'double' a 'float'
