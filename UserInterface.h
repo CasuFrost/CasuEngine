@@ -74,7 +74,8 @@ private:
 			
 		}
 		void display(WindowManager w, int &selected) {
-			
+			w.drawLine(1, 10, 20, 10, COLOR_WHITE);
+			w.drawLine(10, 1, 10, 20, COLOR_WHITE);
 			for (auto but : buttonPool) {
 				but.draw(w);
 			}
@@ -99,6 +100,7 @@ private:
 						mesh newMesh = m.creatCube(0.5f);
 						newMesh.color = k;
 						w.addMeshToPool(newMesh);
+						w.updateMeshPosition(size,{0.f,0.f,3.f});
 						break;
 					}
 

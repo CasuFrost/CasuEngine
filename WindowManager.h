@@ -313,6 +313,7 @@ public:
 		return {r,g,b,c.a};
 	}
 	void renderMesh(bool wireFrame,float time) {
+		vector<ColoredTriangle> renderable;
 		for (auto mesh : meshPool) {
 			matRotZ.m[0][0] = cosf(time);
 			matRotZ.m[0][1] = sinf(time);
@@ -335,6 +336,7 @@ public:
 			}
 			*/
 
+			
 			for (auto tri : mesh.tris) {
 				triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX,triFixedRotatedX, triFixedRotatedZ;
 
@@ -392,8 +394,7 @@ public:
 				line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
 				line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
 				line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
-				normal = crossProduct(line1, line2);
-				normalizeVec(normal);
+				
 				
 				
 				
@@ -404,16 +405,15 @@ public:
 						for (int i = 0; i < 3; i++) {
 							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z)*f);
 							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x)*f*2);
+							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f );
 							//triFixedRotatedZ.p[i].z += 0.1 * sinf(time * triFixedRotatedZ.p[i].y);
-						
-
 						}
 					}
 					else {
-					
 					}
 				}
-				
+				normal = crossProduct(line1, line2);
+				normalizeVec(normal);
 
 				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
 					normal.y * (triTranslated.p[0].y - vCamera.y) +
@@ -426,11 +426,8 @@ public:
 						//calc lum
 						int lum = (int)(150.f * dp);
 						Color litghedColor = changeColorDarknes(mesh.color, lum);
-
+						if (wireFrame)litghedColor = mesh.color;
 						
-						
-						
-
 
 						MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
 						MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
@@ -445,15 +442,28 @@ public:
 						triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
 						triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
 						triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
-						if (wireFrame)drawTriangle(triProjected, litghedColor);
-						else {
-							drawRasterizedTriangleSdl(triProjected, litghedColor);
-							//w.drawTriangle(triProjected, {255,255,255,255});
-						}
+
+						renderable.insert(renderable.end(), { triProjected,litghedColor });
+
 				}
 
 			}
 		}
+		sort(renderable.begin(), renderable.end(), [](ColoredTriangle &a, ColoredTriangle& b) {
+			triangle3d t1 = a.tri;
+			triangle3d t2 = b.tri;
+			float z1 = (t1.p[0].z+ t1.p[1].z+ t1.p[2].z) / 3.f;
+			float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.f;
+			return z1 > z2;
+			});
+		for (auto tri : renderable) {
+			if (wireFrame)drawTriangle(tri.tri, tri.c);
+			else {
+				drawRasterizedTriangleSdl(tri.tri, tri.c);
+				//w.drawTriangle(triProjected, {255,255,255,255});
+			}
+		}
+		
 	}
 
 };

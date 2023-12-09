@@ -1,6 +1,6 @@
 #include <vector>
 #include <math.h>
-
+#include <algorithm>
 using namespace std;
 struct Color {
 	int r;
@@ -24,6 +24,10 @@ struct Triangle {
 };
 struct triangle3d {
 	vec3d p[3];
+};
+struct ColoredTriangle {
+	triangle3d tri;
+	Color c;
 };
 struct mesh {
 	vector<triangle3d> tris;

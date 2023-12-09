@@ -1,5 +1,5 @@
 ﻿  Main.cpp
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Strutture.h(224,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Strutture.h(228,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(21,17): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
@@ -224,45 +224,43 @@ C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(310,9): warning C4244
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(311,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(405,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(406,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(406,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(407,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(408,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(428,59): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(445,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(442,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(445,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(442,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(446,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(443,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(446,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(443,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(447,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(444,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(447,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(444,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(339,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(341,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(46,14): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(66,27): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(70,27): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(74,27): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(78,27): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(94,28): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(99,28): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(103,28): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(107,28): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(111,28): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(115,28): warning C4305: '+=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(67,27): warning C4305: '-=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(72,27): warning C4305: '+=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(77,27): warning C4305: '-=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(82,27): warning C4305: '+=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(98,28): warning C4305: '-=': troncamento da 'double' a 'float'
   CasuEngine.vcxproj -> C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Debug\CasuEngine.exe

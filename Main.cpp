@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
 	vec3d cubeRotation = { 0.f,0.f,0.f };
 	bool rotate = false;
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
-
+	cout << "Use WASD and key_up/ley_down for moving the cube in the space,\nuse the mouse wheel to rotate the cube.";
 	cube.rotation = cubeRotation;
 	cube.position = cubePosition;
 	cube.color = COLOR_RED;
@@ -63,18 +63,22 @@ int main(int argc, char* argv[]) {
 			if (e.type== SDL_MOUSEWHEEL) {
 				if (e.wheel.y > 0) // scroll up
 				{
+					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x-0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
 					cubeRotation.x -= 0.1;
 				}
 				else if (e.wheel.y < 0) // scroll down
 				{
+					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x + 0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
 					cubeRotation.x += 0.1;
 				}
 				if (e.wheel.x > 0) // scroll right
 				{
+					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z-0.1f });
 					cubeRotation.z -= 0.1;
 				}
 				else if (e.wheel.x < 0) // scroll left
 				{
+					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z + 0.1f });
 					cubeRotation.z += 0.1;
 				}
 			}
@@ -92,35 +96,35 @@ int main(int argc, char* argv[]) {
 				
 				if (e.key.keysym.sym == SDLK_DOWN) {
 					cubePosition.z -= 0.04;
-
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z - 0.04f });
 				}
 				
 				if (e.key.keysym.sym == SDLK_UP) {
-					cubePosition.z += 0.04;
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z + 0.04f });
 
 				}
 				if (e.key.keysym.sym == SDLK_d) {
-					cubePosition.x += 0.04;
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x + 0.04f ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z  });
 
 				}
 				if (e.key.keysym.sym == SDLK_a) {
-					cubePosition.x -= 0.04;
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x - 0.04f ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z });
 
 				}
 				if (e.key.keysym.sym == SDLK_w) {
-					cubePosition.y -= 0.04;
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x  ,w.getMeshPosition(selected).y-0.04f, w.getMeshPosition(selected).z });
 
 				}
 				if (e.key.keysym.sym == SDLK_s) {
-					cubePosition.y += 0.04;
+					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x  ,w.getMeshPosition(selected).y + 0.04f, w.getMeshPosition(selected).z });
 
 				}
 			}
 		}
 		
 		vec3d vCamera = { 0,0,0 };
-		w.updateMeshPosition(selected, cubePosition);
-		w.updateMeshRotationDegrees(selected, cubeRotation);
+		//w.updateMeshPosition(selected, cubePosition);
+		//w.updateMeshRotationDegrees(selected, cubeRotation);
 		w.renderMesh( wireFrame, time);
 
 		
