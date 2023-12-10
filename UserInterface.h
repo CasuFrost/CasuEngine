@@ -3,6 +3,9 @@ const Color COLOR_BLUE = { 0,0,255,255 };
 const Color COLOR_RED = { 255,0,0,255 };
 const Color COLOR_GREEN = { 0,255,0,255 };
 const Color COLOR_WHITE = { 255,255,255,255 };
+const Color COLOR_PURPLE = { 150,0,255,255 };
+const Color COLOR_YELLOW = { 255,150,0,255 };
+const Color COLOR_CELESTE = { 0,255,255,255 };
 
 class button {
 	vec2d start;
@@ -88,10 +91,28 @@ private:
 
 						int size= w.getMeshPoolSize();
 						Color k;
-						if (size % 2 == 0) {
+						switch (size % 6) {
+						case 0:
 							k = COLOR_GREEN;
+							break;
+						case 1 :
+							k = COLOR_BLUE;
+							break;
+						case 2:
+							k = COLOR_GREEN;
+							break;
+						case 3:
+							k = COLOR_PURPLE;
+							break;
+						case 4:
+							k = COLOR_YELLOW;
+							break;
+						case 5:
+							k = COLOR_RED;
+							break;
 						}
-						else k = COLOR_BLUE;
+						
+						
 						button newbut = button(0, 19 *(size+1)+2, 19, 19 * (size + 1)+ 21, k, k, size);
 						newbut.meshButton = true;
 						buttonPool.insert(buttonPool.end(), newbut);
