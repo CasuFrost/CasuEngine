@@ -26,7 +26,7 @@
     <ClInclude Include="WindowManager.h">
       <Filter>File di risorse\Libs</Filter>
     </ClInclude>
-    <ClInclude Include="Strutture.h">
+    <ClInclude Include="StructAndVecOp.h">
       <Filter>File di risorse\Libs</Filter>
     </ClInclude>
     <ClInclude Include="meshGenerator.h">

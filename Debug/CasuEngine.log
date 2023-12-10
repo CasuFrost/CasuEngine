@@ -1,239 +1,287 @@
 ﻿  Main.cpp
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Strutture.h(228,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(84,16): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(21,17): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(84,16): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(21,17): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(84,21): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(21,22): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(84,21): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(21,22): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(85,16): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(22,17): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(85,16): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(22,17): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(85,21): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(22,22): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(85,21): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(22,22): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(91,16): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(34,24): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(91,16): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(34,24): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(91,21): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(34,35): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(91,21): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(34,35): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(97,16): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(35,24): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(97,16): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(35,24): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(97,21): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(35,35): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(97,21): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(35,35): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(109,23): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(36,24): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(109,23): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(36,24): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(109,34): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(36,35): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(109,34): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(36,35): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(110,23): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(44,7): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(110,23): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(69,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(110,34): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(74,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(110,34): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(79,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(111,23): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(106,17): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(111,23): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(106,17): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(111,34): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(106,22): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(111,34): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(106,22): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\StructAndVecOp.h(318,2): warning C4091: 'static ': ignorato a sinistra di 'meshGenerator' quando non si dichiara alcuna variabile
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(107,17): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(23,17): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(107,17): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(23,17): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(107,22): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(23,22): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(107,22): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(23,22): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(112,17): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(24,17): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(112,17): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(24,17): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(112,22): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(24,22): warning C4838: la conversione da 'float' a 'int' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(112,22): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(24,22): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(117,17): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(33,7): warning C4018: '<=': errata corrispondenza tra signed e unsigned
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(117,17): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(58,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(117,22): warning C4838: la conversione da 'int' a 'float' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(64,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(117,22): warning C4244: 'inizializzazione': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(70,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(191,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(162,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(191,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(162,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(191,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(162,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(191,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(162,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(192,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(163,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(192,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(163,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(192,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(163,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(192,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(163,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(193,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(164,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(193,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(164,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(193,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(164,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(193,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(164,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(203,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(168,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(204,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(168,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(205,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(168,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(206,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(168,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(224,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(169,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(224,26): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(169,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(224,31): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(169,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(224,36): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(169,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(225,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(170,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(225,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(170,38): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(225,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(170,28): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(225,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(170,18): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(226,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(174,16): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(226,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(175,16): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(226,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(187,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(226,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(188,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(288,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(189,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(289,29): warning C4101: 'triTranslated': variabile locale senza riferimenti
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(190,12): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(289,15): warning C4101: 'triProjected': variabile locale senza riferimenti
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(208,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(309,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(208,26): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(310,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(208,31): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(311,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(208,36): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(209,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(209,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(209,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(209,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(210,21): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(210,27): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(210,33): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(210,39): warning C4838: la conversione da 'int' a 'Uint8' richiede una conversione che supporta un minor numero di dati
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(276,9): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(277,29): warning C4101: 'triTranslated': variabile locale senza riferimenti
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(277,15): warning C4101: 'triProjected': variabile locale senza riferimenti
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(297,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(298,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(299,9): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(404,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(405,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(406,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(407,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(427,59): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(408,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(441,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(428,59): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(441,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(442,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
@@ -248,19 +296,41 @@ C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(443,34): warning C424
 C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(443,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(444,34): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(362,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(444,88): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(566,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(341,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(567,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
   (compilazione del file di origine 'Main.cpp')
   
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(46,14): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(67,27): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(72,27): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(77,27): warning C4305: '-=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(82,27): warning C4305: '+=': troncamento da 'double' a 'float'
-C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(98,28): warning C4305: '-=': troncamento da 'double' a 'float'
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(568,36): warning C4244: '+=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(589,62): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(603,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(603,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(604,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(604,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(605,33): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(605,87): warning C4244: '*=': conversione da 'double' a 'float'. Possibile perdita di dati.
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\WindowManager.h(501,45): warning C4101: 'triRotatedZ': variabile locale senza riferimenti
+  (compilazione del file di origine 'Main.cpp')
+  
+C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Main.cpp(50,14): warning C4305: '+=': troncamento da 'double' a 'float'
   CasuEngine.vcxproj -> C:\Users\mcasu\OneDrive\Desktop\CasuEngine\Debug\CasuEngine.exe

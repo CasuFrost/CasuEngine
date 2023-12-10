@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="meshGenerator.h" />
-    <ClInclude Include="Strutture.h" />
+    <ClInclude Include="StructAndVecOp.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
