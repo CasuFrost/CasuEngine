@@ -34,6 +34,7 @@ private :
 		Mesh a;
 		return a;
 	}
+
 public:
 	vec3d getMeshPosition(int i) {
 		return meshPool[i].position;
@@ -258,20 +259,11 @@ public:
 		clear();
 		
 	}
-	static void MultiplyMatVec(vec3d& in, vec3d& out, mat4x4& m) { //Moltiplica matrice e vettore
-		out.x = in.x * m.m[0][0] + in.y * m.m[1][0] + in.z * m.m[2][0] + m.m[3][0];
-		out.y = in.x * m.m[0][1] + in.y * m.m[1][1] + in.z * m.m[2][1] + m.m[3][1];
-		out.z = in.x * m.m[0][2] + in.y * m.m[1][2] + in.z * m.m[2][2] + m.m[3][2];
-		float w = in.x * m.m[0][3] + in.y * m.m[1][3] + in.z * m.m[2][3] + m.m[3][3];
-		if (w != 0) {
-			out.x /= w;
-			out.y /= w;
-			out.z /= w;
-		}
-	}
+	
 	void clearMeshPool() {
 		meshPool.clear();
 	}
+
 	void rotateMesh(int i) {
 		if (i <= meshPool.size()) {
 			triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX;
@@ -289,10 +281,7 @@ public:
 	float dotProdutct(vec3d a, vec3d b) {
 		return a.x * b.x + a.y * b.y + a.z * b.z;
 	}
-	void normalizeVec(vec3d &normal) {
-		float normalLenght = sqrtf(powf(normal.x, 2) + powf(normal.y, 2) + powf(normal.z, 2));
-		normal.x /= normalLenght; normal.y /= normalLenght; normal.z /= normalLenght;
-	}
+	
 	Color changeColorDarknes(Color c, float lum) {
 		int r = c.r * lum / 150.f;
 		int g = c.g * lum / 150.f;
@@ -312,120 +301,95 @@ public:
 		matRotX.m[2][2] = cosf(time);
 	}
 
+	
 
-	void handleFixedRot(Mesh &mesh, triangle3d &tri) {
-		mat4x4 FixedMatRotX;
-		triangle3d triFixedRotatedZ;
-		triangle3d triFixedRotatedX;
-		triangle3d triFixedRotatedY;
+	//update the triangle rotation, according to the mesh rotation
+	void updateTriFixedRotation(Mesh &mesh, triangle3d &tri) {
+		mat4x4 FixedMatRotX, FixedMatRotZ, FixedMatRotY;
+		
 		FixedMatRotX.m[1][1] = cosf(mesh.rotation.x);
 		FixedMatRotX.m[1][2] = sinf(mesh.rotation.x);
 		FixedMatRotX.m[2][1] = -sinf(mesh.rotation.x);
 		FixedMatRotX.m[2][2] = cosf(mesh.rotation.x);
-		FixedMatRotX.m[0][0] = FixedMatRotX.m[3][3] = 1;
-		for (int i = 0; i < 3; i++) {
-			MultiplyMatVec(tri.p[i], triFixedRotatedX.p[i], FixedMatRotX);
-		}
-		mat4x4 FixedMatRotZ;
+	
+
 		FixedMatRotZ.m[0][0] = cosf(mesh.rotation.z);
 		FixedMatRotZ.m[0][1] = sinf(mesh.rotation.z);
 		FixedMatRotZ.m[1][0] = -sinf(mesh.rotation.z);
 		FixedMatRotZ.m[1][1] = cosf(mesh.rotation.z);
-		FixedMatRotZ.m[2][2] = FixedMatRotZ.m[3][3] = 1;
-		for (int i = 0; i < 3; i++) {
-			MultiplyMatVec(triFixedRotatedX.p[i], triFixedRotatedZ.p[i], FixedMatRotZ);
-		}
-
-		mat4x4 FixedMatRotY;
+	
+		 
 		FixedMatRotY.m[0][0] = cosf(mesh.rotation.y);
 		FixedMatRotY.m[2][0] = sinf(mesh.rotation.y);
 		FixedMatRotY.m[0][2] = -sinf(mesh.rotation.y);
 		FixedMatRotY.m[2][2] = cosf(mesh.rotation.y);
-		FixedMatRotY.m[1][1] = FixedMatRotY.m[3][3] = 1;
+
+		FixedMatRotY.m[1][1] = FixedMatRotY.m[3][3] = FixedMatRotX.m[0][0] = FixedMatRotX.m[3][3]= FixedMatRotZ.m[2][2] = FixedMatRotZ.m[3][3] = 1;
+
+		tri=rotateTri(tri, FixedMatRotX, FixedMatRotZ, FixedMatRotY);
+
+	} 
+
+	void updateTriPosition(Mesh& mesh, triangle3d& tri) { 
 		for (int i = 0; i < 3; i++) {
-			MultiplyMatVec(triFixedRotatedZ.p[i], triFixedRotatedY.p[i], FixedMatRotY);
+			tri.p[i].x += mesh.position.x;
+			tri.p[i].y += mesh.position.y;
+			tri.p[i].z += mesh.position.z;
 		}
-		tri = triFixedRotatedY;
-	}
+	} //update the triangle position, according to the mesh position
 
-
-	void renderMesh(bool wireFrame,float time) {
+	void renderMesh(int wireFrame,float time) {
 		vector<ColoredTriangle> renderable;
 
 		for (auto mesh : meshPool) {
 
 			updateRotationMatrices(time); 
 
-
-			
 			for (auto tri : mesh.tris) {
-				triangle3d triProjected, triTranslated, triRotatedZ, triContiniusRotated ;
-				for (int i = 0; i < 3; i++) {
-					//MultiplyMatVec(tri.p[i], triRotatedZ.p[i], matRotZ);
-					MultiplyMatVec(tri.p[i], triContiniusRotated.p[i], matRotX);
-
-				}
-				if (!mesh.continiusRotation) {
-					triContiniusRotated = tri;
-				}
-
+				triangle3d triProjected, triTranslated ;
 
 				//Update Rotation
-				handleFixedRot(mesh, triContiniusRotated);
+				updateTriFixedRotation(mesh, tri);
 
+				triTranslated = tri;
+				updateTriPosition(mesh, triTranslated);
 
-				for (int i = 0; i < 3; i++) {
-					triContiniusRotated.p[i].x += mesh.position.x;
-					triContiniusRotated.p[i].y += mesh.position.y;
-					triContiniusRotated.p[i].z += mesh.position.z;
-				}
-				triTranslated = triContiniusRotated;
-
-
-				
-
-				//normals 
-				vec3d normal, line1, line2;
-				line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
-				line1.y = triTranslated.p[1].y - triTranslated.p[0].y;
-				line1.z = triTranslated.p[1].z - triTranslated.p[0].z;
-				line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
-				line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
-				line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
-				
-				
-				
 				
 				//Wave
 				if (mesh.water) {
 					float f = 1;
-					if (true||normal.z==0) {
+					if (true) {
 						for (int i = 0; i < 3; i++) {
-							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z)*f);
-							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x)*f*2);
-							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f );
-							//triFixedRotatedZ.p[i].z += 0.1 * sinf(time * triFixedRotatedZ.p[i].y);
+							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z) * f);
+							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x) * f * 2);
+							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f);
 						}
 					}
 					else {
 					}
 				}
 				
-				normal = crossProduct(line1, line2);
-				normalizeVec(normal);
+
+				//normals 
+				vec3d normal = getNormalVector(triTranslated);
+				
+				
+
 
 				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
 					normal.y * (triTranslated.p[0].y - vCamera.y) +
 					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
 
-						vec3d light_direction = { 1.0f,0.f,-1.f };
+						vec3d light_direction = { 0.0f,0.f,-1.f };
 						normalizeVec(light_direction);
 						float dp = dotProdutct(normal, light_direction);
 
 						//calc lum
 						int lum = (int)(150.f * dp);
 						Color litghedColor = changeColorDarknes(mesh.color, lum);
-						
+						if (wireFrame%3 != 0) {
+							litghedColor = mesh.color;
+						}
 						
 
 						MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
@@ -456,178 +420,27 @@ public:
 			return z1 > z2;
 			});
 		for (auto tri : renderable) {
-			if (wireFrame) {
+
+			switch (wireFrame % 3) {
+			case 0:
+				drawRasterizedTriangleSdl(tri.tri, tri.c);
+				break;
+			case 1:
+				drawTriangle(tri.tri, tri.c);
+				break;
+			case 2:
 				drawRasterizedTriangleSdl(tri.tri, tri.c);
 				drawVertsTriangle(tri.tri, { 255,255,255,255 });
-				
+				break;
+			}
 
-			}
-			else {
-				drawRasterizedTriangleSdl(tri.tri, tri.c);
-				//w.drawTriangle(triProjected, {255,255,255,255});
-			}
+			
 		}
 		
 	}
 
 
 
-	void renderObject(bool wireFrame, float time) {
-		vector<ColoredTriangle> renderable;
-		for (auto obj : objPool) {
-			matRotZ.m[0][0] = cosf(time);
-			matRotZ.m[0][1] = sinf(time);
-			matRotZ.m[1][0] = -sinf(time);
-			matRotZ.m[1][1] = cosf(time);
-			matRotZ.m[2][2] = matRotZ.m[3][3] = 1;
-
-
-			matRotX.m[1][1] = cosf(time);
-			matRotX.m[1][2] = sinf(time);
-			matRotX.m[2][1] = -sinf(time);
-			matRotX.m[2][2] = cosf(time);
-			matRotX.m[0][0] = matRotX.m[3][3] = 1;
-			/*DELETE ROT
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					matRotX.m[i][j] = 1;
-					matRotZ.m[i][j] = 1;
-				}
-			}
-			*/
-
-
-			for (auto tri : obj.mesh.tris) {
-				triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX, triFixedRotatedX, triFixedRotatedZ;
-
-
-				for (int i = 0; i < 3; i++) {
-					//MultiplyMatVec(tri.p[i], triRotatedZ.p[i], matRotZ);
-					MultiplyMatVec(tri.p[i], triRotatedX.p[i], matRotX);
-
-				}
-				if (!obj.mesh.continiusRotation) {
-					triRotatedX = tri;
-				}
-
-
-				//Update Rotation
-				mat4x4 FixedMatRotX;
-				FixedMatRotX.m[1][1] = cosf(obj.mesh.rotation.x);
-				FixedMatRotX.m[1][2] = sinf(obj.mesh.rotation.x);
-				FixedMatRotX.m[2][1] = -sinf(obj.mesh.rotation.x);
-				FixedMatRotX.m[2][2] = cosf(obj.mesh.rotation.x);
-				FixedMatRotX.m[0][0] = FixedMatRotX.m[3][3] = 1;
-				for (int i = 0; i < 3; i++) {
-					MultiplyMatVec(triRotatedX.p[i], triFixedRotatedX.p[i], FixedMatRotX);
-				}
-
-
-				mat4x4 FixedMatRotZ;
-				FixedMatRotZ.m[0][0] = cosf(obj.mesh.rotation.z);
-				FixedMatRotZ.m[0][1] = sinf(obj.mesh.rotation.z);
-				FixedMatRotZ.m[1][0] = -sinf(obj.mesh.rotation.z);
-				FixedMatRotZ.m[1][1] = cosf(obj.mesh.rotation.z);
-				FixedMatRotZ.m[2][2] = FixedMatRotZ.m[3][3] = 1;
-				for (int i = 0; i < 3; i++) {
-					MultiplyMatVec(triFixedRotatedX.p[i], triFixedRotatedZ.p[i], FixedMatRotZ);
-				}
-
-
-
-
-				for (int i = 0; i < 3; i++) {
-					triFixedRotatedZ.p[i].x += obj.mesh.position.x;
-					triFixedRotatedZ.p[i].y += obj.mesh.position.y;
-					triFixedRotatedZ.p[i].z += obj.mesh.position.z;
-				}
-				triTranslated = triFixedRotatedZ;
-
-
-
-
-				//normals 
-				vec3d normal, line1, line2;
-				line1.x = triTranslated.p[1].x - triTranslated.p[0].x;
-				line1.y = triTranslated.p[1].y - triTranslated.p[0].y;
-				line1.z = triTranslated.p[1].z - triTranslated.p[0].z;
-				line2.x = triTranslated.p[2].x - triTranslated.p[0].x;
-				line2.y = triTranslated.p[2].y - triTranslated.p[0].y;
-				line2.z = triTranslated.p[2].z - triTranslated.p[0].z;
-
-
-
-
-				//Wave
-				if (obj.mesh.water) {
-					float f = 1;
-					if (true || normal.z == 0) {
-						for (int i = 0; i < 3; i++) {
-							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z) * f);
-							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x) * f * 2);
-							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f);
-							//triFixedRotatedZ.p[i].z += 0.1 * sinf(time * triFixedRotatedZ.p[i].y);
-						}
-					}
-					else {
-					}
-				}
-
-				normal = crossProduct(line1, line2);
-				normalizeVec(normal);
-
-				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
-					normal.y * (triTranslated.p[0].y - vCamera.y) +
-					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
-
-					vec3d light_direction = { 1.0f,0.f,-1.f };
-					normalizeVec(light_direction);
-					float dp = dotProdutct(normal, light_direction);
-
-					//calc lum
-					int lum = (int)(150.f * dp);
-					Color litghedColor = changeColorDarknes(obj.mesh.color, lum);
-					if (wireFrame)litghedColor = obj.mesh.color;
-
-
-					MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
-					MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
-					MultiplyMatVec(triTranslated.p[2], triProjected.p[2], projMatrix);
-
-
-					//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
-					triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
-					triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
-					triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
-
-					triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
-					triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
-					triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
-
-					renderable.insert(renderable.end(), { triProjected,litghedColor });
-
-				}
-
-			}
-		}
-		sort(renderable.begin(), renderable.end(), [](ColoredTriangle& a, ColoredTriangle& b) {
-			triangle3d t1 = a.tri;
-			triangle3d t2 = b.tri;
-			float z1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.f;
-			float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.f;
-			return z1 > z2;
-			});
-		for (auto tri : renderable) {
-			if (wireFrame) {
-				drawRasterizedTriangleSdl(tri.tri, tri.c);
-				drawTriangle(tri.tri, { 255,255,255,255 });
-			}
-			else {
-				drawRasterizedTriangleSdl(tri.tri, tri.c);
-				//w.drawTriangle(triProjected, {255,255,255,255});
-			}
-		}
-
-	}
+	
 
 };

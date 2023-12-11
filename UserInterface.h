@@ -85,7 +85,7 @@ private:
 
 						int size= w.getMeshPoolSize();
 						Color k;
-						switch (size % 6) {
+						switch (size % 7) {
 						case 0:
 							k = COLOR_GREEN;
 							break;
@@ -103,6 +103,9 @@ private:
 							break;
 						case 5:
 							k = COLOR_RED;
+							break;
+						case 6:
+							k = COLOR_CELESTE;
 							break;
 						}
 						

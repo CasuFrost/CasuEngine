@@ -10,11 +10,14 @@ int main(int argc, char* argv[]) {
 	
 	Triangle t = { {400,400}, { 450,450 }, { 400,250 } };
 	//w.drawTriangle(t, c);
-	bool wireFrame = false;
+	int wireFrame = 0;
 	meshGenerator meshGen;
 	Mesh rect = meshGen.creatRect(1.f,0.1f);
-	Mesh cube = meshGen.creatCube(0.5f);
+	Mesh cube;
+	cube.position = {0,0,8};
+	cube.LoadFromObjectFile("models/VideoShip.obj");
 	
+
 	Mesh pyramid = meshGen.createPyramid(1.0f);
 
 	//Main loop flag
@@ -50,8 +53,6 @@ int main(int argc, char* argv[]) {
 		time +=0.01;	
 		while (SDL_PollEvent(&e) != 0)
 		{
-			
-			
 			SDL_GetMouseState(&xMouse, &yMouse);
 			if (xMouse * yMouse != 0) {
 				mousePos = { xMouse ,yMouse };
@@ -102,7 +103,7 @@ int main(int argc, char* argv[]) {
 					
 				}
 				if (e.key.keysym.sym == SDLK_q) {
-					wireFrame = abs(wireFrame - 1);
+					wireFrame += 1;
 				}
 				if (e.key.keysym.sym == SDLK_m) {
 					w.makeWater(selected);
