@@ -27,7 +27,9 @@ struct vec2d {
 
 struct vec3d {
 	float x,y,z;
-	
+	bool equals(vec3d a) {
+		return a.x == x&& a.y == y&& a.z == z;
+	}
 };
 
 static vec2d mousePos;
@@ -95,6 +97,35 @@ struct Mesh {
 struct mat4x4 {
 	float m[4][4] = { 0 };
 };
+struct mat3x3 {
+	float m[3][3] = { 1 };
+	float det() {
+		return m[0][0] * m[1][1] * m[2][2] +
+			m[0][1] * m[1][2] * m[2][0] +
+			m[0][2] * m[1][0] * m[2][1] -
+			(m[0][2] * m[1][1] * m[2][0]
+				+ m[0][1] * m[1][0] * m[2][2]
+				+ m[0][0] * m[1][2] * m[2][1]);
+	}
+};
+
+
+
+int orientation(triangle3d tri)
+{
+	vec3d p1 = tri.p[0];
+	vec3d p2 = tri.p[1];
+	vec3d p3 = tri.p[2];
+	
+	int val = (p2.y - p1.y) * (p3.x - p2.x)
+		- (p2.x - p1.x) * (p3.y - p2.y);
+
+	if (val == 0)
+		return 0; // collinear
+
+	return (val > 0) ? 1 : 2; // clock or counterclock wise
+}
+
 static void printMousePosition() {
 	cout << "\nx : " << mousePos.x << " y : " << mousePos.y;
 }
@@ -116,6 +147,63 @@ static float fgetMin(vector<float> v) {
 	}
 	return min;
 }
+/*
+vec3d lowestLeftPoint(triangle3d tri) {
+	vector<vec3d> lowest;
+	vector<float> yValues;
+	yValues.push_back(tri.p[0].y); yValues.push_back(tri.p[1].y); yValues.push_back(tri.p[2].y);
+	float minY = fgetMin(yValues);
+	for (int i = 0; i < 3; i++) {
+		if (tri.p[i].y == minY) lowest.push_back(tri.p[i]);
+	}
+	if (lowest.size() == 1)return lowest[0];
+	if (lowest[0].x < lowest[1].x) return lowest[0];
+	return lowest[1];
+}
+vec3d highestLeftPoint(triangle3d tri) {
+	vector<vec3d> lowest;
+	vector<float> yValues;
+	yValues.push_back(tri.p[0].y); yValues.push_back(tri.p[1].y); yValues.push_back(tri.p[2].y);
+	float minY = fgetMax(yValues);
+	for (int i = 0; i < 3; i++) {
+		if (tri.p[i].y == minY) lowest.push_back(tri.p[i]);
+	}
+	if (lowest.size() == 1)return lowest[0];
+	if (lowest[0].x < lowest[1].x) return lowest[0];
+	return lowest[1];
+}
+
+static int getHighestPointIndicies(triangle3d tri) {
+	//Seleziono il punto più basso
+	int lowestIndicies; //Indice del punto più basso e più a sinistra
+	vec3d lowestTriangle = highestLeftPoint(tri);
+	if (lowestTriangle.equals(tri.p[0]))return  0;
+	if (lowestTriangle.equals(tri.p[1]))return 1;
+	if (lowestTriangle.equals(tri.p[2]))return 2;
+	return 0;
+}
+static int getLowestPointIndicies(triangle3d tri) {
+	//Seleziono il punto più basso
+	int lowestIndicies; //Indice del punto più basso e più a sinistra
+	vec3d lowestTriangle = lowestLeftPoint(tri);
+	if (lowestTriangle.equals(tri.p[0]))return  0;
+	if (lowestTriangle.equals(tri.p[1]))return 1;
+	if (lowestTriangle.equals(tri.p[2]))return 2;
+	return 0;
+}
+
+static void adjustMeshTrisOrderNew(Mesh& mesh) {
+	vector<triangle3d> newTrianglePool;
+	for (auto tri : mesh.tris) {
+		int lowestPointIndicies = getLowestPointIndicies(tri); // è l'indice del punto più in basso
+		int nextInd = (lowestPointIndicies + 1) % 3;
+		int nextIndPreviewed = getHighestPointIndicies(tri);
+		bool eq = nextIndPreviewed == nextInd;
+		cout << "\n" << eq;
+	}
+}
+*/
+
 
 static vec3d crossProduct(vec3d a, vec3d b) {
 	vec3d result = { a.y * b.z - a.z * b.y,a.z * b.x - a.x * b.z,a.x * b.y - a.y * b.x };

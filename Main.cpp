@@ -13,10 +13,11 @@ int main(int argc, char* argv[]) {
 	int wireFrame = 0;
 	meshGenerator meshGen;
 	Mesh rect = meshGen.creatRect(1.f,0.1f);
-	Mesh SpaceShip;
-	SpaceShip.position = {0,0,13};
-	SpaceShip.LoadFromObjectFile("models/VideoShip.obj");
+	Mesh car;
+	car.position = {0,0,13};
+	car.LoadFromObjectFile("models/VideoShip.obj");
 	
+
 
 	Mesh pyramid = meshGen.createPyramid(1.0f);
 
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	cout << "Use WASD and key_up/ley_down for moving the cube in the space,\nuse the mouse wheel to rotate the cube.";
 	
-	SpaceShip.color = COLOR_RED;
+	car.color = COLOR_RED;
 	
 	int selected = 0;
 	UserInterface ui;
@@ -47,14 +48,20 @@ int main(int argc, char* argv[]) {
 
 	
 	gameObject newObj("a");
-	newObj.position = { 0,0,8 };
+	newObj.position = { 0,0,15 };
 	newObj.rotation = { 0,0,0 };
-	SpaceShip.rotation = SpaceShip.position = { 0,0,0 };
-	newObj.mesh = SpaceShip;
+	car.rotation = car.position = { 0,0,0 };
+	newObj.mesh = car;
 	w.addObjToPool(newObj);
 	
+
 	
-	
+	//TEST
+	/*triangle3d a;
+	a.p[0] = { 0,0,0 };
+	a.p[1] = { 0,1,0 };
+	a.p[2] = { 2,2,0 };
+	adjustTris(a);*/
 
 
 	while (!quit) {
@@ -119,6 +126,7 @@ int main(int argc, char* argv[]) {
 				if (e.key.keysym.sym == SDLK_q) {
 					wireFrame += 1;
 				}
+				
 				if (e.key.keysym.sym == SDLK_m) {
 					w.makeWater(selected);
 				}
@@ -154,13 +162,11 @@ int main(int argc, char* argv[]) {
 		}
 		
 		
-		//w.updateMeshPosition(selected, cubePosition);
-		//w.updateMeshRotationDegrees(selected, cubeRotation);
-		w.renderMesh( wireFrame, time);
-		w.renderObject(wireFrame, time);
+
 
 		
-		
+		w.renderMesh( wireFrame, time);
+		w.renderObject(wireFrame, time);
 
 		//SDL_Delay(10);
 		ui.display(w, selected);

@@ -119,7 +119,7 @@ private:
 						newMesh.color = k;
 						gameObject g("");
 						g.mesh = newMesh;
-						g.position = g.rotation = { 0,0,3 };
+						g.position = {0,0,3}; g.rotation = { 0,0,0 };
 						w.addObjToPool(g);
 						
 						break;

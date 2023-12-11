@@ -72,6 +72,12 @@ public:
 	}
 
 	//Object Transform Operation
+	void adjustObjtrisOrder(int i) {
+		if (i <= objPool.size()) {
+			//adjustMeshTrisOrderNew(objPool[i].mesh);
+		}
+	}
+
 	vec3d getObjPosition(int i) {
 		return objPool[i].position;
 	}
@@ -504,14 +510,21 @@ public:
 		vector<ColoredTriangle> renderable;
 
 		for (auto obj : objPool) {
-			
+
 			Mesh mesh = obj.mesh;
+
+			
+			
 			mesh.position = obj.position;
 			mesh.rotation = obj.rotation;
 
 			updateRotationMatrices(time); 
 
 			for (auto tri : mesh.tris) {
+				
+				
+
+
 				triangle3d triProjected, triTranslated ;
 
 				//Update Rotation
