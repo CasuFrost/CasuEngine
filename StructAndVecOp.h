@@ -105,6 +105,9 @@ static float fgetMax(vector<float> v) {
 	}
 	return max;
 }
+static float dotProdutct(vec3d a, vec3d b) {
+	return a.x * b.x + a.y * b.y + a.z * b.z;
+}
 
 static float fgetMin(vector<float> v) {
 	float min = v[0];
@@ -212,14 +215,14 @@ static vec3d getNormalVector(triangle3d tri) {
 	return normalizeVec(normal);
 }
 
-class Object {
+class gameObject {
 	public:
 		string name;
 		vec3d position;
 		vec3d rotation;
 		Mesh mesh;
-		Object();
-		Object(string n) {
+		gameObject();
+		gameObject(string n) {
 			name = n;
 		}
 		bool physics;

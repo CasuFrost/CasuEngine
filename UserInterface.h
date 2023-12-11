@@ -83,7 +83,7 @@ private:
 				if (but.posInButton(mousePos)) {
 					if (but.getId() == -2) {
 
-						int size= w.getMeshPoolSize();
+						int size= w.getObjPoolSize();
 						Color k;
 						switch (size % 7) {
 						case 0:
@@ -117,7 +117,10 @@ private:
 						meshGenerator m;
 						Mesh newMesh = m.creatCube(0.5f);
 						newMesh.color = k;
-						w.addMeshToPool(newMesh);
+						gameObject g("");
+						g.mesh = newMesh;
+						g.position = g.rotation = { 0,0,3 };
+						w.addObjToPool(g);
 						
 						break;
 					}

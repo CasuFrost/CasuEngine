@@ -3,11 +3,13 @@
 #include "StructAndVecOp.h"
 
 class WindowManager {
+
 private :
 	vector<Mesh> meshPool;
-	vector<Object> objPool;
+	vector<gameObject> objPool;
 	vec3d vCamera = { 0,0,0 };
 	SDL_Renderer* renderer;
+	SDL_Window* window;
 	//window size
 	int width = 1000;
 	int height = 1000;
@@ -28,7 +30,6 @@ private :
 		return is_top_edge || is_left_edge;
 	}
 	
-	
 	Mesh getMesh(int i) {
 		if(i<=meshPool.size())return meshPool[i];
 		Mesh a;
@@ -36,30 +37,32 @@ private :
 	}
 
 public:
+	//Public Variable definition
+
+		//Projection Matrix
+		float fNear = 0.1f;
+		float fFar = 1000.0f;
+		float fov = 90.f;
+		float fAspectRatio = (float)height / width;
+		float radFov = fov / 180.f * 3.14159f; // conversione da gradi a radianti
+		float fFovRad = 1.f / tanf(radFov * 0.5f);
+		mat4x4 projMatrix;
+
+	//Mesh Transform Operation
 	vec3d getMeshPosition(int i) {
 		return meshPool[i].position;
 	}
+
 	vec3d getMeshRotation(int i) {
 		return meshPool[i].rotation;
 	}
-	void makeWater(int i) {
-		if (meshPool[i].water)return;
-		meshGenerator genMesh;
-		Mesh a = genMesh.creatRect(4.f, 0.05f);
-		a.position = meshPool[i].position;
-		a.rotation = meshPool[i].rotation;
-		a.color = {0,0,255,255};
-		meshPool[i] = a;
-		for (int j = 0; j <8; j++) {
-			subsetMesh(i);
-		}
-		meshPool[i].water = true;
-	}
+
 	void updateMeshPosition(int i, vec3d newPos) {
 		if (i <= meshPool.size()) {
 			meshPool[i].position = newPos;
 		}
 	}
+
 	void updateMeshRotationDegrees(int i, vec3d newRot) {
 
 		if (i <= meshPool.size()) {
@@ -67,42 +70,91 @@ public:
 		}
 
 	}
+
+	//Object Transform Operation
+	vec3d getObjPosition(int i) {
+		return objPool[i].position;
+	}
+
+	vec3d getObjRotation(int i) {
+		return objPool[i].rotation;
+	}
+
+	void updateObjPosition(int i, vec3d newPos) {
+		if (i <= objPool.size()) {
+			objPool[i].position = newPos;
+		}
+	}
+
+	void updateObjRotationDegrees(int i, vec3d newRot) {
+		if (i <= objPool.size()) {
+			objPool[i].rotation = newRot;
+		}
+	}
+
+	//ObjectPool operation
+	int getObjPoolSize() {
+		return objPool.size();
+	}
+	void clearObjPool() {
+		objPool.clear();
+	}
+
+	//MeshPool operation
+	int getMeshPoolSize() {
+		return meshPool.size();
+	}
+	void clearMeshPool() {
+		meshPool.clear();
+	}
+
+	//Other Mesh Operation
+
+	void makeWater(int i) {
+		if (objPool[i].mesh.water)return;
+		meshGenerator genMesh;
+		Mesh a = genMesh.creatRect(4.f, 0.05f);
+
+		a.position = objPool[i].mesh.position;
+		a.rotation = objPool[i].mesh.rotation;
+		a.color = {0,0,255,255};
+		objPool[i].mesh = a;
+		for (int j = 0; j <8; j++) {
+			subsetMesh(i);
+		}
+		objPool[i].mesh.water = true;
+	}
+
 	void updateMeshColor(int i, Color c) {
 		if (i <= meshPool.size()) {
 			meshPool[i].color = c;
 		}
 	}
+
 	void subsetMesh(int i) {
-		if (meshPool[i].water)return;
+		if (objPool[i].mesh.water)return;
 		meshGenerator meshGen;
 		 
-		meshGen.subsectMesh(meshPool[i]);
+		meshGen.subsectMesh(objPool[i].mesh);
 		
 	}
+
 	void subsetAllMesh() {
 		meshGenerator meshGen;
-		for (unsigned int i = 0; i < meshPool.size(); i++)
+		for (unsigned int i = 0; i < objPool.size(); i++)
 		{
-			meshGen.subsectMesh(meshPool[i]);
+			meshGen.subsectMesh(objPool[i].mesh);
 		}
 	}
+
 	void addMeshToPool(Mesh m) {
 		meshPool.insert(meshPool.end(), m);
 	}
+	void addObjToPool(gameObject o) {
+		objPool.insert(objPool.end(), o);
+	}
 	
-	
-	SDL_Window *window;
-	//Projection Matrix
-	float fNear = 0.1f;
-	float fFar = 1000.0f;
-	float fov = 90.f;
-	float fAspectRatio = (float)height / width;
-	float radFov = fov / 180.f * 3.14159f; // conversione da gradi a radianti
-	float fFovRad = 1.f/tanf(radFov *0.5f);
-	mat4x4 projMatrix;
-	
-
-
+	//Some Window Operation
 	int getScreenWidth() {
 		return width;
 	}
@@ -110,9 +162,12 @@ public:
 		return height;
 	}
 
+	
+	
+	//Constructor & Initializer
 	void initializeMatrix() {
 		projMatrix.m[0][0] = fAspectRatio * fFovRad;
-		projMatrix.m[1][1] =  fFovRad;
+		projMatrix.m[1][1] = fFovRad;
 		projMatrix.m[2][2] = fFar / (fFar - fNear);
 		projMatrix.m[3][2] = (-fFar * fNear) / (fFar - fNear);
 		projMatrix.m[2][3] = 1.f;
@@ -122,8 +177,7 @@ public:
 		matRotY.m[1][1] = matRotY.m[3][3] = 1;
 
 	}
-	
-	
+
 	WindowManager(const char *title, int x,int y,int h, int w,Uint32 flags) {
 		width = w;
 		height = h;
@@ -136,9 +190,10 @@ public:
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		initializeMatrix();
 	}
-	int getMeshPoolSize() {
-		return meshPool.size();
-	}
+
+
+	//Drawing on Screen
+
 	void render() {
 		SDL_SetRenderDrawColor(renderer,0, 0, 0, 0);
 		SDL_RenderPresent(renderer);
@@ -205,6 +260,7 @@ public:
 			}
 		}
 	}
+
 	void drawRasterizedTriangleSdl(triangle3d t, Color c) {
 		SDL_Color c1 = { c.r, c.g, c.b, c.a };
 		SDL_Color c2 = { c.r , c.g , c.b , c.a };
@@ -218,12 +274,11 @@ public:
 		SDL_RenderGeometry(renderer, nullptr, verts.data(), verts.size(), nullptr, 0);
 	}
 	
-
-
 	void drawPoint(vec2d p, Color c) {
 		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		SDL_RenderDrawPoint(renderer, p.x, p.y);
 	}
+
 	void drawBigPoint(vec2d point,Color c) {
 		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		//SDL_RenderDrawPoint(renderer, point.x, point.y);
@@ -241,6 +296,7 @@ public:
 		
 		
 	}
+
 	void drawSquare(vec2d pos, int size, Color c) {
 		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		drawLine(pos.x - (int)size / 2, pos.y - (int)size / 2, pos.x + (int)size / 2, pos.y - (int)size / 2, c);
@@ -248,11 +304,13 @@ public:
 		drawLine(pos.x - (int)size / 2, pos.y - (int)size / 2, pos.x - (int)size / 2, pos.y + (int)size / 2, c);
 		drawLine(pos.x + (int)size / 2, pos.y - (int)size / 2, pos.x + (int)size / 2, pos.y + (int)size / 2, c);
 	}
+
 	void endLoop() {
 			render();
 			clear();
 
 	}
+
 	void endLoop(int delay) {
 		render();
 		SDL_Delay(delay);
@@ -260,10 +318,8 @@ public:
 		
 	}
 	
-	void clearMeshPool() {
-		meshPool.clear();
-	}
-
+	
+	//Rotation Advanced Operation
 	void rotateMesh(int i) {
 		if (i <= meshPool.size()) {
 			triangle3d triProjected, triTranslated, triRotatedZ, triRotatedX;
@@ -278,17 +334,6 @@ public:
 			}
 		}
 	}
-	float dotProdutct(vec3d a, vec3d b) {
-		return a.x * b.x + a.y * b.y + a.z * b.z;
-	}
-	
-	Color changeColorDarknes(Color c, float lum) {
-		int r = c.r * lum / 150.f;
-		int g = c.g * lum / 150.f;
-		int b = c.b * lum / 150.f;
-	
-		return {r,g,b,c.a};
-	}
 
 	void updateRotationMatrices(float time) {
 		matRotZ.m[0][0] = cosf(time);
@@ -300,8 +345,6 @@ public:
 		matRotX.m[2][1] = -sinf(time);
 		matRotX.m[2][2] = cosf(time);
 	}
-
-	
 
 	//update the triangle rotation, according to the mesh rotation
 	void updateTriFixedRotation(Mesh &mesh, triangle3d &tri) {
@@ -330,6 +373,27 @@ public:
 
 	} 
 
+
+	
+	Color changeColorDarknes(Color c, float lum) {
+		int r = c.r * lum / 150.f;
+		int g = c.g * lum / 150.f;
+		int b = c.b * lum / 150.f;
+	
+		return {r,g,b,c.a};
+	}
+
+
+	vec3d light_direction = { 0.0f,0.f,-1.f };
+	void projectTri(triangle3d& in, triangle3d& out) {
+		for (int i = 0; i < 3; i++) {
+			MultiplyMatVec(in.p[0], out.p[0], projMatrix);//Proietta un singolo triangolo
+			MultiplyMatVec(in.p[1], out.p[1], projMatrix);
+			MultiplyMatVec(in.p[2], out.p[2], projMatrix);
+		}
+
+	}
+
 	void updateTriPosition(Mesh& mesh, triangle3d& tri) { 
 		for (int i = 0; i < 3; i++) {
 			tri.p[i].x += mesh.position.x;
@@ -338,84 +402,11 @@ public:
 		}
 	} //update the triangle position, according to the mesh position
 
-	void renderMesh(int wireFrame,float time) {
-		vector<ColoredTriangle> renderable;
-
-		for (auto mesh : meshPool) {
-
-			updateRotationMatrices(time); 
-
-			for (auto tri : mesh.tris) {
-				triangle3d triProjected, triTranslated ;
-
-				//Update Rotation
-				updateTriFixedRotation(mesh, tri);
-
-				triTranslated = tri;
-				updateTriPosition(mesh, triTranslated);
-
-				
-				//Wave
-				if (mesh.water) {
-					float f = 1;
-					if (true) {
-						for (int i = 0; i < 3; i++) {
-							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z) * f);
-							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x) * f * 2);
-							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f);
-						}
-					}
-					else {
-					}
-				}
-				
-
-				//normals 
-				vec3d normal = getNormalVector(triTranslated);
-				
-				
-
-
-				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
-					normal.y * (triTranslated.p[0].y - vCamera.y) +
-					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
-
-						vec3d light_direction = { 0.0f,0.f,-1.f };
-						normalizeVec(light_direction);
-						float dp = dotProdutct(normal, light_direction);
-
-						//calc lum
-						int lum = (int)(150.f * dp);
-						Color litghedColor = changeColorDarknes(mesh.color, lum);
-						if (wireFrame%3 != 0) {
-							litghedColor = mesh.color;
-						}
-						
-
-						MultiplyMatVec(triTranslated.p[0], triProjected.p[0], projMatrix);//Proietta un singolo triangolo
-						MultiplyMatVec(triTranslated.p[1], triProjected.p[1], projMatrix);
-						MultiplyMatVec(triTranslated.p[2], triProjected.p[2], projMatrix);
-
-
-						//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
-						triProjected.p[0].x += 1.f; triProjected.p[0].y += 1.f;
-						triProjected.p[1].x += 1.f; triProjected.p[1].y += 1.f;
-						triProjected.p[2].x += 1.f; triProjected.p[2].y += 1.f;
-
-						triProjected.p[0].x *= 0.5 * (float)getScreenWidth(); triProjected.p[0].y *= 0.5 * (float)getScreenWidth();
-						triProjected.p[1].x *= 0.5 * (float)getScreenWidth(); triProjected.p[1].y *= 0.5 * (float)getScreenWidth();
-						triProjected.p[2].x *= 0.5 * (float)getScreenWidth(); triProjected.p[2].y *= 0.5 * (float)getScreenWidth();
-
-						renderable.insert(renderable.end(), { triProjected,litghedColor });
-
-				}
-
-			}
-		}
-		sort(renderable.begin(), renderable.end(), [](ColoredTriangle &a, ColoredTriangle& b) {
+	void drawRenderableTriangles(vector<ColoredTriangle> renderable,int wireFrame) {
+		sort(renderable.begin(), renderable.end(), [](ColoredTriangle& a, ColoredTriangle& b) {
 			triangle3d t1 = a.tri;
 			triangle3d t2 = b.tri;
-			float z1 = (t1.p[0].z+ t1.p[1].z+ t1.p[2].z) / 3.f;
+			float z1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.f;
 			float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.f;
 			return z1 > z2;
 			});
@@ -434,13 +425,143 @@ public:
 				break;
 			}
 
-			
 		}
+	}
+
+	void normalizeTriangleInScreenSpace(triangle3d &tri) {
+		tri.p[0].x += 1.f; tri.p[0].y += 1.f;
+		tri.p[1].x += 1.f; tri.p[1].y += 1.f;
+		tri.p[2].x += 1.f; tri.p[2].y += 1.f;
 		
+		tri.p[0].x *= 0.5 * (float)getScreenWidth(); tri.p[0].y *= 0.5 * (float)getScreenWidth();
+		tri.p[1].x *= 0.5 * (float)getScreenWidth(); tri.p[1].y *= 0.5 * (float)getScreenWidth();
+		tri.p[2].x *= 0.5 * (float)getScreenWidth(); tri.p[2].y *= 0.5 * (float)getScreenWidth();
 	}
 
 
+	void renderMesh(int wireFrame,float time) {
+		vector<ColoredTriangle> renderable;
 
-	
+		for (auto mesh : meshPool) {
 
+			updateRotationMatrices(time); 
+
+			for (auto tri : mesh.tris) {
+				triangle3d triProjected, triTranslated ;
+
+				//Update Rotation
+				updateTriFixedRotation(mesh, tri);
+
+				triTranslated = tri;
+				updateTriPosition(mesh, triTranslated);
+
+				//Wave
+				if (mesh.water) {
+					float f = 1;
+					if (true) {
+						for (int i = 0; i < 3; i++) {
+							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z) * f);
+							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x) * f * 2);
+							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f);
+						}
+					}
+					else {
+					}
+				}
+				
+				//normals 
+				vec3d normal = getNormalVector(triTranslated);
+				
+				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
+					normal.y * (triTranslated.p[0].y - vCamera.y) +
+					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
+
+						normalizeVec(light_direction);
+						float dp = dotProdutct(normal, light_direction);
+
+						//calc lum
+						int lum = (int)(150.f * dp);
+						Color litghedColor = changeColorDarknes(mesh.color, lum);
+
+						if (wireFrame%3 != 0) {
+							litghedColor = mesh.color;
+						}
+						
+						projectTri(triTranslated, triProjected);//Proietta un singolo triangolo
+						
+						//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
+						normalizeTriangleInScreenSpace(triProjected);
+						
+						renderable.insert(renderable.end(), { triProjected,litghedColor });
+
+				}
+			}
+		}
+		drawRenderableTriangles(renderable, wireFrame);
+	}
+
+	void renderObject(int wireFrame,float time) {
+		vector<ColoredTriangle> renderable;
+
+		for (auto obj : objPool) {
+			
+			Mesh mesh = obj.mesh;
+			mesh.position = obj.position;
+			mesh.rotation = obj.rotation;
+
+			updateRotationMatrices(time); 
+
+			for (auto tri : mesh.tris) {
+				triangle3d triProjected, triTranslated ;
+
+				//Update Rotation
+				updateTriFixedRotation(mesh, tri);
+
+				triTranslated = tri;
+				updateTriPosition(mesh, triTranslated);
+
+				//Wave
+				if (mesh.water) {
+					float f = 1;
+					if (true) {
+						for (int i = 0; i < 3; i++) {
+							triTranslated.p[i].x += 0.2 * sinf((time + triTranslated.p[i].z) * f);
+							triTranslated.p[i].y += 0.3 * sinf((time + triTranslated.p[i].x) * f * 2);
+							triTranslated.p[i].z += 0.2 * sinf((time + triTranslated.p[i].y) * f);
+						}
+					}
+					else {
+					}
+				}
+				
+				//normals 
+				vec3d normal = getNormalVector(triTranslated);
+				
+				if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
+					normal.y * (triTranslated.p[0].y - vCamera.y) +
+					normal.z * (triTranslated.p[0].z - vCamera.z) < 0.f)) {
+
+						normalizeVec(light_direction);
+						float dp = dotProdutct(normal, light_direction);
+
+						//calc lum
+						int lum = (int)(150.f * dp);
+						Color litghedColor = changeColorDarknes(mesh.color, lum);
+
+						if (wireFrame%3 != 0) {
+							litghedColor = mesh.color;
+						}
+						
+						projectTri(triTranslated, triProjected);//Proietta un singolo triangolo
+						
+						//La matrice di proiezione restituisce un risultato in uno schermo normalizzato da -1 ad +1. Va scalato !
+						normalizeTriangleInScreenSpace(triProjected);
+						
+						renderable.insert(renderable.end(), { triProjected,litghedColor });
+
+				}
+			}
+		}
+		drawRenderableTriangles(renderable, wireFrame);
+	}
 };

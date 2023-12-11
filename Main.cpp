@@ -13,9 +13,9 @@ int main(int argc, char* argv[]) {
 	int wireFrame = 0;
 	meshGenerator meshGen;
 	Mesh rect = meshGen.creatRect(1.f,0.1f);
-	Mesh cube;
-	cube.position = {0,0,8};
-	cube.LoadFromObjectFile("models/VideoShip.obj");
+	Mesh SpaceShip;
+	SpaceShip.position = {0,0,13};
+	SpaceShip.LoadFromObjectFile("models/VideoShip.obj");
 	
 
 	Mesh pyramid = meshGen.createPyramid(1.0f);
@@ -39,14 +39,24 @@ int main(int argc, char* argv[]) {
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	cout << "Use WASD and key_up/ley_down for moving the cube in the space,\nuse the mouse wheel to rotate the cube.";
 	
-	cube.color = COLOR_RED;
-	w.addMeshToPool(cube);
+	SpaceShip.color = COLOR_RED;
+	
 	int selected = 0;
 	UserInterface ui;
 	int xMouse = 0; int yMouse = 0;
 
 	
+	gameObject newObj("a");
+	newObj.position = { 0,0,8 };
+	newObj.rotation = { 0,0,0 };
+	SpaceShip.rotation = SpaceShip.position = { 0,0,0 };
+	newObj.mesh = SpaceShip;
+	w.addObjToPool(newObj);
 	
+	
+	
+
+
 	while (!quit) {
 		//printMousePosition();
 
@@ -69,34 +79,38 @@ int main(int argc, char* argv[]) {
 			if (e.type== SDL_MOUSEWHEEL) {
 				if (e.wheel.y > 0) // scroll up
 				{
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x-0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
-					
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x - 0.1f,w.getObjRotation(selected).y, w.getObjRotation(selected).z });
+					//w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x-0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
 				}
 				else if (e.wheel.y < 0) // scroll down
 				{
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x + 0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x + 0.1f,w.getObjRotation(selected).y, w.getObjRotation(selected).z });
+					//w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x + 0.1f,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z });
 					
 				}
 				if (e.wheel.x > 0) // scroll right
 				{
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z-0.1f });
+					//w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z-0.1f });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x ,w.getObjRotation(selected).y, w.getObjRotation(selected).z - 0.1f });
 					
 				}
 				else if (e.wheel.x < 0) // scroll left
 				{
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z + 0.1f });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x ,w.getObjRotation(selected).y, w.getObjRotation(selected).z + 0.1f });
+					//w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y, w.getMeshRotation(selected).z + 0.1f });
 					
 				}
 			}
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_y) {
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y + 0.1f, w.getMeshRotation(selected).z  });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x ,w.getObjRotation(selected).y + 0.1f, w.getObjRotation(selected).z });
+					//w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y + 0.1f, w.getMeshRotation(selected).z  });
 				}
 				if (e.key.keysym.sym == SDLK_x) {
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x + 0.1f,w.getMeshRotation(selected).y , w.getMeshRotation(selected).z });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x+0.1f ,w.getObjRotation(selected).y + 0.1f, w.getObjRotation(selected).z });
 				}
 				if (e.key.keysym.sym == SDLK_z) {
-					w.updateMeshRotationDegrees(selected, { w.getMeshRotation(selected).x ,w.getMeshRotation(selected).y , w.getMeshRotation(selected).z + 0.1f });
+					w.updateObjRotationDegrees(selected, { w.getObjRotation(selected).x + 0.1f ,w.getObjRotation(selected).y , w.getObjRotation(selected).z+0.1f });
 				}
 				if (e.key.keysym.sym == SDLK_SPACE) {
 					w.subsetMesh(selected);
@@ -110,28 +124,30 @@ int main(int argc, char* argv[]) {
 				}
 				
 				if (e.key.keysym.sym == SDLK_DOWN) {
-					
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z - 0.04f });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x ,w.getObjPosition(selected).y, w.getObjPosition(selected).z - 0.04f });
+					//w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z - 0.04f });
 				}
 				
 				if (e.key.keysym.sym == SDLK_UP) {
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z + 0.04f });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x ,w.getObjPosition(selected).y, w.getObjPosition(selected).z + 0.04f });
+					//w.updateMeshPosition(selected, { w.getMeshPosition(selected).x ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z + 0.04f });
 
 				}
 				if (e.key.keysym.sym == SDLK_d) {
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x + 0.04f ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z  });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x + 0.04f ,w.getObjPosition(selected).y, w.getObjPosition(selected).z });
+					// w.updateMeshPosition(selected, { w.getMeshPosition(selected).x + 0.04f ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z  });
 
 				}
 				if (e.key.keysym.sym == SDLK_a) {
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x - 0.04f ,w.getMeshPosition(selected).y, w.getMeshPosition(selected).z });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x - 0.04f ,w.getObjPosition(selected).y, w.getObjPosition(selected).z });
 
 				}
 				if (e.key.keysym.sym == SDLK_w) {
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x  ,w.getMeshPosition(selected).y-0.04f, w.getMeshPosition(selected).z });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x  ,w.getObjPosition(selected).y-0.04f, w.getObjPosition(selected).z });
 
 				}
 				if (e.key.keysym.sym == SDLK_s) {
-					w.updateMeshPosition(selected, { w.getMeshPosition(selected).x  ,w.getMeshPosition(selected).y + 0.04f, w.getMeshPosition(selected).z });
+					w.updateObjPosition(selected, { w.getObjPosition(selected).x  ,w.getObjPosition(selected).y + 0.04f, w.getObjPosition(selected).z });
 
 				}
 			}
@@ -141,6 +157,7 @@ int main(int argc, char* argv[]) {
 		//w.updateMeshPosition(selected, cubePosition);
 		//w.updateMeshRotationDegrees(selected, cubeRotation);
 		w.renderMesh( wireFrame, time);
+		w.renderObject(wireFrame, time);
 
 		
 		
