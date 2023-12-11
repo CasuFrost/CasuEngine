@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	car.position = {0,0,13};
 	car.LoadFromObjectFile("models/VideoShip.obj");
 	
-
+	
 
 	Mesh pyramid = meshGen.createPyramid(1.0f);
 
@@ -50,6 +50,7 @@ int main(int argc, char* argv[]) {
 	gameObject newObj("a");
 	newObj.position = { 0,0,15 };
 	newObj.rotation = { 0,0,0 };
+	newObj.physics = true;
 	car.rotation = car.position = { 0,0,0 };
 	newObj.mesh = car;
 	w.addObjToPool(newObj);
@@ -162,7 +163,7 @@ int main(int argc, char* argv[]) {
 		}
 		
 		
-
+		
 
 		
 		w.renderMesh( wireFrame, time);

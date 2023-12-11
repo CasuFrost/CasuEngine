@@ -524,6 +524,7 @@ public:
 				
 				
 
+				
 
 				triangle3d triProjected, triTranslated ;
 
@@ -532,6 +533,7 @@ public:
 
 				triTranslated = tri;
 				updateTriPosition(mesh, triTranslated);
+
 
 				//Wave
 				if (mesh.water) {
